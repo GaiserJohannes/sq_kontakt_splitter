@@ -11,7 +11,7 @@ namespace KontaktSplitter.Lang
     {
         public List<string> Titles { get; } = new List<string>();
         public List<string> Functions { get; } = new List<string>();
-        public Dictionary<string, string> Salutaions { get; } = new Dictionary<string, string>();
+        public Dictionary<string, Gender> Salutaions { get; } = new Dictionary<string, Gender>();
 
         public abstract string CreateLetterSalutation(Contact contact, string function = null);
     }
