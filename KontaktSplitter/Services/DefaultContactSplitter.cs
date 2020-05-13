@@ -17,17 +17,28 @@ namespace KontaktSplitter.Services
         public DefaultContactSplitter()
         {
             var german = new German();
+
+            german.Titles.Add("Prof. Dr. rer. nat.");
+            german.Titles.Add("Dr. rer. nat.");
             german.Titles.Add("Professor");
             german.Titles.Add("Prof.");
-            german.Titles.Add("Dr.");
             german.Titles.Add("Dipl. Ing.");
-            german.Titles.Add("Dr. rer. nat.");
+            german.Titles.Add("Dr.");
 
             german.Salutaions.Add("Frau", Gender.FEMALE);
             german.Salutaions.Add("Fr.", Gender.FEMALE);
             german.Salutaions.Add("Herr", Gender.MALE);
             german.Salutaions.Add("Hr.", Gender.MALE);
             languages.Add(german);
+
+            var english = new English();
+            english.Titles.Add("Professor");
+
+            english.Salutaions.Add("Mr.", Gender.MALE);
+            english.Salutaions.Add("Mrs.", Gender.FEMALE);
+            english.Salutaions.Add("Ms.", Gender.FEMALE);
+            languages.Add(english);
+
         }
 
         public Contact SplitContact(string input)
@@ -45,10 +56,10 @@ namespace KontaktSplitter.Services
             Contact contact = new Contact();
             contact.Language = language;
 
-            var salutationregex = CreateSalutationRegex(languages[0]);
+            var salutationregex = CreateSalutationRegex(language);
             var salutation = salutationregex.Match(input);
 
-            var titleregex = CreateTitleRegex(languages[0]);
+            var titleregex = CreateTitleRegex(language);
             var title = titleregex.Match(input);
 
             if (salutation.Success)
@@ -63,16 +74,28 @@ namespace KontaktSplitter.Services
             }
 
             int nameindex = title.Success ? title.Index + title.Length : salutation.Success ? salutation.Index + salutation.Length : 0;
-            var names = input.Substring(nameindex).Trim().Split(' ');
+            var fullname = input.Substring(nameindex).Trim();
 
-            if(names.Count() > 1)
+            //von lastname, name
+            if (fullname.Contains(","))
             {
-                contact.Name = names[0];
-                contact.LastName = string.Join(" ", names.Skip(1));
+                int index = fullname.IndexOf(',');
+                contact.LastName = fullname.Substring(0, index).Trim();
+                contact.Name = fullname.Substring(index + 1).Trim();
             }
-            else if(names.Count() == 1)
+            //name von lastname
+            else
             {
-                contact.LastName = names[0];
+                var names = fullname.Split(' ');
+                if (names.Count() > 1)
+                {
+                    contact.Name = names[0];
+                    contact.LastName = string.Join(" ", names.Skip(1));
+                }
+                else if (names.Count() == 1)
+                {
+                    contact.LastName = names[0];
+                }
             }
             return contact;
         }
@@ -101,12 +124,12 @@ namespace KontaktSplitter.Services
 
         public Regex CreateSalutationRegex(Language language)
         {
-            return new Regex($"({string.Join("|", language.Salutaions.Keys.Select(s => Regex.Escape(s)))})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return new Regex($"({string.Join("|", language.Salutaions.Keys.Select(s => Regex.Escape(s)))})", RegexOptions.Compiled);
         }
 
         public Regex CreateTitleRegex(Language language)
         {
-            return new Regex($"({string.Join("|", language.Titles.Select(t => Regex.Escape(t)))})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return new Regex($"({string.Join("|", language.Titles.Select(t => Regex.Escape(t)))})", RegexOptions.Compiled);
         }
 
     }

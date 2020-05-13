@@ -41,6 +41,10 @@ namespace KontaktSplitter.Model
             {
                 return false;
             }
+            if(!(Language != null && contact.Language != null && Language.GetType().Name.Equals(contact.Language.GetType().Name) || Language == null && contact.Language == null))
+            {
+                return false;
+            }
             return true;
         }
     }
