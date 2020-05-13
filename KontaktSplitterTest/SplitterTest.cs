@@ -53,9 +53,9 @@ namespace KontaktSplitterTest
 
             var expected = new Contact();
             expected.Language = new German();
-            expected.Title = "Professor Freiherr";
-            expected.Name = "Heinrich";
-            expected.LastName = "vom Wald";
+            expected.Title = "Professor";
+            expected.Name = "Heinreich";
+            expected.LastName = "Freiherr vom Wald";
             expected.Gender = Gender.MALE;
 
             Assert.AreEqual(expected, actual);
@@ -169,7 +169,7 @@ namespace KontaktSplitterTest
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Herr";
-            expected.Title = "Dr.-Ing. Dr. rer. nat. Dr. h.c. mult.";
+            expected.Title = "Dr. Ing. Dr. rer. nat. Dr. h.c. mult.";
             expected.Name = "Paul";
             expected.LastName = "Steffens";
             expected.Gender = Gender.MALE;

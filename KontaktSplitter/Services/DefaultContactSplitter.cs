@@ -18,12 +18,15 @@ namespace KontaktSplitter.Services
         {
             var german = new German();
 
-            german.Titles.Add("Prof. Dr. rer. nat.");
-            german.Titles.Add("Dr. rer. nat.");
             german.Titles.Add("Professor");
             german.Titles.Add("Prof.");
-            german.Titles.Add("Dipl. Ing.");
             german.Titles.Add("Dr.");
+            german.Titles.Add("Dipl.");
+            german.Titles.Add("rer. nat.");
+            german.Titles.Add("med.");
+            german.Titles.Add("h.c. mult.");
+            german.Titles.Add("Ing.");
+
 
             german.Salutaions.Add("Frau", Gender.FEMALE);
             german.Salutaions.Add("Fr.", Gender.FEMALE);
@@ -59,18 +62,24 @@ namespace KontaktSplitter.Services
             var salutationregex = CreateSalutationRegex(language);
             var salutation = salutationregex.Match(input);
 
-            var titleregex = CreateTitleRegex(language);
-            var title = titleregex.Match(input);
-
             if (salutation.Success)
             {
                 contact.Salutation = salutation.Value;
                 contact.Gender = language.Salutaions[salutation.Value];
             }
 
-            if (title.Success)
+            var titleregex = CreateTitleRegex(language);
+            var title = titleregex.Match(input);
+            
+            while (title.Success)
             {
-                contact.Title = title.Value;
+                contact.Title = string.Format($"{contact.Title} {title.Value}").Trim(); 
+                var next = title.NextMatch();
+                if (!next.Success)
+                {
+                    break;
+                }
+                title = next;
             }
 
             int nameindex = title.Success ? title.Index + title.Length : salutation.Success ? salutation.Index + salutation.Length : 0;
@@ -119,7 +128,7 @@ namespace KontaktSplitter.Services
                 aProps += string.IsNullOrEmpty(info.GetValue(a) as string) ? 0 : 1;
                 bProps += string.IsNullOrEmpty(info.GetValue(b) as string) ? 0 : 1;
             }
-            return aProps > bProps ? a : b;
+            return aProps >= bProps ? a : b;
         }
 
         public Regex CreateSalutationRegex(Language language)
