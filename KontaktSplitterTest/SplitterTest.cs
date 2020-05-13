@@ -48,6 +48,7 @@ namespace KontaktSplitterTest
         public void TestMethod3()
         {
             var splitter = new DefaultContactSplitter();
+            var x = new Contact();
 
             var actual = splitter.SplitContact("Professor Heinreich Freiherr vom Wald");
 
@@ -56,7 +57,6 @@ namespace KontaktSplitterTest
             expected.Title = "Professor";
             expected.Name = "Heinreich";
             expected.LastName = "Freiherr vom Wald";
-            expected.Gender = Gender.MALE;
 
             Assert.AreEqual(expected, actual);
         }
