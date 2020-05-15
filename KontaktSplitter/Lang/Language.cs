@@ -28,7 +28,7 @@ namespace KontaktSplitter.Lang
         /// Contains language specidic vocabulary of contact titles.
         /// The list is ordered by the titles priority in descending manner
         /// </summary>
-        public IList<Title> Titles { get; set; } = new List<Title>();
+        public IList<string> Titles { get; set; } = new List<string>();
 
         /// <summary>
         /// Contains language specific vocabulary of contact functions

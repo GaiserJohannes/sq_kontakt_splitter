@@ -168,7 +168,7 @@ namespace KontaktSplitterTest
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Herr";
-            expected.Title = "Dr. Ing. Dr. rer. nat. Dr. h.c. mult.";
+            expected.Title = "Dr.-Ing. Dr. rer. nat. Dr. h.c. mult.";
             expected.Name = "Paul";
             expected.LastName = "Steffens";
             expected.Gender = Gender.MALE;

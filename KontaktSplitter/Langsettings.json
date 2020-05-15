@@ -7,190 +7,153 @@
         "UNKNOWN": "Sehr geehrte*r"
       },
       "titles": [
-        {
-          "title": "Master",
-          "types": [
-            "M. A.",
-            "M. Sc.",
-            "M. Eng.",
-            "LL. M.",
-            "M. F. A.",
-            "M. Mus.",
-            "M. Ed."
-          ],
-          "w": "",
-          "m": "",
-          "d":  "",
-          "rank": 2
-        },
-        {
-          "title": "Diplom",
-          "types": [
-            "Dipl.-Inf.",
-            "Dipl.-Ing.",
-            "Dipl.-Betriebsw.",
-            "Dipl.-Wirtsch.-Inf.",
-            "Dipl.-Soz.päd.",
-            "Dipl. Inf.",
-            "Dipl. Ing.",
-            "Dipl. Betriebsw.",
-            "Dipl. Wirtsch.-Inf.",
-            "Dipl. Soz.päd."
-          ],
-          "w": "",
-          "m": "",
-          "d": "",
-          "rank": 5
-        },
-        {
-          "title": "Doktor",
-          "types": [
-            "Doktor",
-            "Doktorin",
-            "Dr. agr.",
-            "Dr. biol. anim.",
-            "Dr. biol. hom.",
-            "Dr. cult.",
-            "Dr. disc. pol.",
-            "Dr.-Ing.",
-            "Dr. iur.",
-            "Dr. iur. can.",
-            "Dr. iur. et rer. pol",
-            "Dr. iur. utr.",
-            "Dr. math.",
-            "Dr. med.",
-            "Dr. med. dent.",
-            "Dr. med. sci.",
-            "Dr. med. vet.",
-            "Dr. nat. med.",
-            "Dr. nat. techn.",
-            "Dr. oec.",
-            "Dr. oec. publ.",
-            "Dr. oec. troph.",
-            "Dr. paed.",
-            "Dr. pharm.",
-            "Dr. phil.",
-            "Dr. phil. in art.",
-            "Dr. phil. nat.",
-            "Dr. PH",
-            "Dr. rer. agr.",
-            "Dr. rer. biol. hum.",
-            "Dr. rer. biol. vet.",
-            "Dr. rer. cult.",
-            "Dr. rer. cur.",
-            "Dr. rer. forest.",
-            "Dr. rer. hort.",
-            "Dr. rer. hum.",
-            "Dr. rer. med.",
-            "Dr. rer. medic.",
-            "Dr. rer. merc.",
-            "Dr. rer. mont.",
-            "Dr. rer. nat.",
-            "Dr. rer. oec.",
-            "Dr. rer. physiol.",
-            "Dr. rer. pol.",
-            "Dr. rer. publ.",
-            "Dr. rer. sec.",
-            "Dr. rer. silv.",
-            "Dr. rer. soc.",
-            "Dr. rer. tech.",
-            "Dr. sc. agr.",
-            "Dr. sc. hum.",
-            "Dr. sc. mus.",
-            "Dr. sc. oec.",
-            "Dr. sc. phil.",
-            "Dr. sc. pol.",
-            "Dr. sc. soc.",
-            "Dr. sc. techn.",
-            "Dr. Sportwiss.",
-            "Dr. theol.",
-            "Dr. troph.",
-            "Dr. h.c.",
-            "Dr. h.c. mult.",
-            "Dr. e. h.",
-            "D."
-          ],
-          "w": "Dr.",
-          "m": "Dr.",
-          "d": "Dr.",
-          "rank": 10
-        },
-        {
-          "title": "Professor",
-          "types": [
-            "Professor",
-            "Professorin",
-            "Prof."
-          ],
-          "w": "Professorin",
-          "m": "Professor",
-          "d": "Professor*in",
-          "rank": 15
-        }
+        "M. A.",
+        "M. Sc.",
+        "M. Eng.",
+        "LL. M.",
+        "M. F. A.",
+        "M. Mus.",
+        "M. Ed.",
+        "Dipl.-Inf.",
+        "Dipl.-Ing.",
+        "Dipl.-Betriebsw.",
+        "Dipl.-Wirtsch.-Inf.",
+        "Dipl.-Soz.päd.",
+        "Dipl. Inf.",
+        "Dipl. Ing.",
+        "Dipl. Betriebsw.",
+        "Dipl. Wirtsch.-Inf.",
+        "Dipl. Soz.päd.",
+        "Doktor",
+        "Doktorin",
+        "Dr. agr.",
+        "Dr. biol. anim.",
+        "Dr. biol. hom.",
+        "Dr. cult.",
+        "Dr. disc. pol.",
+        "Dr.-Ing.",
+        "Dr. iur.",
+        "Dr. iur. can.",
+        "Dr. iur. et rer. pol",
+        "Dr. iur. utr.",
+        "Dr. math.",
+        "Dr. med. dent.",
+        "Dr. med. sci.",
+        "Dr. med. vet.",
+        "Dr. med.",
+        "Dr. nat. med.",
+        "Dr. nat. techn.",
+        "Dr. oec.",
+        "Dr. oec. publ.",
+        "Dr. oec. troph.",
+        "Dr. paed.",
+        "Dr. pharm.",
+        "Dr. phil.",
+        "Dr. phil. in art.",
+        "Dr. phil. nat.",
+        "Dr. PH",
+        "Dr. rer. agr.",
+        "Dr. rer. biol. hum.",
+        "Dr. rer. biol. vet.",
+        "Dr. rer. cult.",
+        "Dr. rer. cur.",
+        "Dr. rer. forest.",
+        "Dr. rer. hort.",
+        "Dr. rer. hum.",
+        "Dr. rer. med.",
+        "Dr. rer. medic.",
+        "Dr. rer. merc.",
+        "Dr. rer. mont.",
+        "Dr. rer. nat.",
+        "Dr. rer. oec.",
+        "Dr. rer. physiol.",
+        "Dr. rer. pol.",
+        "Dr. rer. publ.",
+        "Dr. rer. sec.",
+        "Dr. rer. silv.",
+        "Dr. rer. soc.",
+        "Dr. rer. tech.",
+        "Dr. sc. agr.",
+        "Dr. sc. hum.",
+        "Dr. sc. mus.",
+        "Dr. sc. oec.",
+        "Dr. sc. phil.",
+        "Dr. sc. pol.",
+        "Dr. sc. soc.",
+        "Dr. sc. techn.",
+        "Dr. Sportwiss.",
+        "Dr. theol.",
+        "Dr. troph.",
+        "Dr. h.c. mult.",
+        "Dr. h.c.",
+        "Dr. e. h.",
+        "Dr.",
+        "D.",
+        "Professor",
+        "Professorin",
+        "Prof."
       ],
       "functions": [
         {
-          "function": "Bürgermeister(in)",
-          "m": "Bürgermeister",
-          "w": "Bürgermeisterin",
-          "d": "Bürgermeister*in"
+          "Name": "Bürgermeister(in)",
+          "MaleOut": "Bürgermeister",
+          "FemaleOut": "Bürgermeisterin",
+          "DiversOut": "Bürgermeister*in"
         },
         {
-          "function": "Präsident(in)",
-          "m": "Präsident",
-          "w": "Präsidentin",
-          "d": "Präsident*in"
+          "Name": "Präsident(in)",
+          "MaleOut": "Präsident",
+          "FemaleOut": "Präsidentin",
+          "DiversOut": "Präsident*in"
         },
         {
-          "function": "Leiter(in)",
-          "m": "Leiter",
-          "w": "Leiterin",
-          "d": "Leiter*in"
+          "Name": "Leiter(in)",
+          "MaleOut": "Leiter",
+          "FemaleOut": "Leiterin",
+          "DiversOut": "Leiter*in"
         },
         {
-          "function": "Direktor(in)",
-          "m": "Direktor",
-          "w": "Direktorin",
-          "d": "Direktor*in"
+          "Name": "Direktor(in)",
+          "MaleOut": "Direktor",
+          "FemaleOut": "Direktorin",
+          "DiversOut": "Direktor*in"
         },
         {
-          "function": "Vorsitzende(r)",
-          "m": "Vorsitzender",
-          "w": "Vorsitzende",
-          "d": "Vorsitzende*r"
+          "Name": "Vorsitzende(r)",
+          "MaleOut": "Vorsitzender",
+          "FemaleOut": "Vorsitzende",
+          "DiversOut": "Vorsitzende*r"
         },
         {
-          "function": "Pfarrer(in)",
-          "m": "Pfarrer",
-          "w": "Pfarrerin",
-          "d": "Pfarrer*in"
+          "Name": "Pfarrer(in)",
+          "MaleOut": "Pfarrer",
+          "FemaleOut": "Pfarrerin",
+          "DiversOut": "Pfarrer*in"
         },
         {
-          "function": "Pastor(in)",
-          "m": "Pastor",
-          "w": "Pastorin",
-          "d": "Pastor*in"
+          "Name": "Pastor(in)",
+          "MaleOut": "Pastor",
+          "FemaleOut": "Pastorin",
+          "DiversOut": "Pastor*in"
         },
         {
-          "function": "Bischof",
-          "m": "Bischof",
-          "w": "",
-          "d": ""
+          "Name": "Bischof",
+          "MaleOut": "Bischof",
+          "FemaleOut": "",
+          "DiversOut": ""
         },
         {
-          "function": "Kardinal",
-          "m": "Kardinal",
-          "w": "",
-          "d": ""
+          "Name": "Kardinal",
+          "MaleOut": "Kardinal",
+          "FemaleOut": "",
+          "DiversOut": ""
         }
       ],
-      "salutaions": {
+      "salutaitons": {
         "Frau": "FEMALE",
-        "Fr": "FEMALE",
-        "F.": "FEMALE",
+        "Fr.": "FEMALE",
         "Herr": "MALE",
-        "Hr": "MALE",
-        "H.": "MALE"
+        "Hr.": "MALE"
       }
     },
     "english": {
@@ -199,29 +162,23 @@
         "FEMALE": "Dear Ms"
       },
       "titles": [
-        {
-          "title": "Member",
-          "types": [
-            "MBE"
-          ],
-          "w": "MBE",
-          "m": "MBE",
-          "rank": 5
-        }
+        "MBE"
       ],
       "functions": [
         {
-          "function": "Duke",
-          "m": "Duke",
-          "w": "Duchess"
+          "Name": "Duke",
+          "MaleOut": "Duke",
+          "FemaleOut": "Duchess",
+          "DiversOut": ""
         },
         {
-          "function": "Baron",
-          "m": "Baron",
-          "w": "Baroness"
+          "Name": "Baron",
+          "MaleOut": "Baron",
+          "FemaleOut": "Baroness",
+          "DiversOut": ""
         }
       ],
-      "salutaions": {
+      "salutaitons": {
         "Mrs.": "FEMALE",
         "Ms.": "FEMALE",
         "Miss": "FEMALE",

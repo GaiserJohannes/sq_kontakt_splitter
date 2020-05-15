@@ -1,53 +1,28 @@
 ﻿using KontaktSplitter.Lang;
 using KontaktSplitter.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace KontaktSplitter.Services
 {
     public class DefaultContactSplitter : IContactSplitter
     {
-        private IConfiguration configuration = new JSONConfiguration();
         private List<Language> languages = new List<Language>();
 
         public DefaultContactSplitter()
         {
             var german = new German();
-
-            german.Titles.Add("Professor");
-            german.Titles.Add("Prof.");
-            german.Titles.Add("Dr.");
-            german.Titles.Add("Dipl.");
-            german.Titles.Add("rer. nat.");
-            german.Titles.Add("med.");
-            german.Titles.Add("h.c. mult.");
-            german.Titles.Add("Ing.");
-
-            german.Salutations.Add("Frau", Gender.FEMALE);
-            german.Salutations.Add("Fr.", Gender.FEMALE);
-            german.Salutations.Add("Herr", Gender.MALE);
-            german.Salutations.Add("Hr.", Gender.MALE);
             languages.Add(german);
 
             var english = new English();
-            english.Titles.Add("Professor");
-
-            english.Salutations.Add("Mr.", Gender.MALE);
-            english.Salutations.Add("Mrs.", Gender.FEMALE);
-            english.Salutations.Add("Ms.", Gender.FEMALE);
             languages.Add(english);
 
         }
 
         public Contact SplitContact(string input)
         {
-            //var languages = configuration.GetLanguages();
             var contacts = new List<Contact>();
-            var contact = new Contact();
             languages.ForEach(l => contacts.Add(convert(input, l)));
 
             return BestMatch(contacts);
