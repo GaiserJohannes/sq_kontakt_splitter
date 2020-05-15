@@ -79,14 +79,18 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplitterTest.cs" />
+    <Compile Include="GermanLanguageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KontaktSplitter\KontaktSplitter.csproj">
-      <Project>{21D53493-33A5-4406-8195-1EEC69DF21B8}</Project>
+      <Project>{21d53493-33a5-4406-8195-1eec69df21b8}</Project>
       <Name>KontaktSplitter</Name>
     </ProjectReference>
   </ItemGroup>

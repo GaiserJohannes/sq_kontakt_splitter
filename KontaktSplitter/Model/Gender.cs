@@ -8,6 +8,7 @@ namespace KontaktSplitter.Model
 {
     public enum Gender
     {
+        UNKNOWN,
         MALE,
         FEMALE,
         DIVERSE
