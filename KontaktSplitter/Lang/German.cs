@@ -53,7 +53,7 @@ namespace KontaktSplitter.Lang
         /// <returns>Salutation string</returns>
         private string GetSalutation(Gender gender)
         {
-            switch(gender)
+            switch (gender)
             {
                 case Gender.MALE:
                     return langConfig[gender.ToString()];

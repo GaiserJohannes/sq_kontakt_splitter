@@ -27,7 +27,6 @@ namespace KontaktSplitter.Services
             german.Titles.Add("h.c. mult.");
             german.Titles.Add("Ing.");
 
-
             german.Salutations.Add("Frau", Gender.FEMALE);
             german.Salutations.Add("Fr.", Gender.FEMALE);
             german.Salutations.Add("Herr", Gender.MALE);

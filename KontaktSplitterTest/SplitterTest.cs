@@ -8,7 +8,6 @@ namespace KontaktSplitterTest
     [TestClass]
     public class SplitterTest
     {
-
         [TestMethod]
         public void TestMethod1()
         {
