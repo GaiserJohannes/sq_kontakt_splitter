@@ -1,0 +1,13 @@
+{
+  "Salut": {
+    "German": {
+      "MALE": "Sehr geehrter Herr",
+      "FEMALE": "Sehr geehrte Frau",
+      "UNKNOWN": "Sehr geehrte*r"
+    },
+    "English": {
+      "MALE": "Dear Mr.",
+      "FEMALE": "Dear Ms"
+    }
+  }
+}
