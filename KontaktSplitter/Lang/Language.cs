@@ -28,17 +28,17 @@ namespace KontaktSplitter.Lang
         /// Contains language specidic vocabulary of contact titles.
         /// The list is ordered by the titles priority in descending manner
         /// </summary>
-        public List<string> Titles { get; set; } = new List<string>();
+        public IList<Title> Titles { get; set; } = new List<Title>();
 
         /// <summary>
         /// Contains language specific vocabulary of contact functions
         /// </summary>
-        public List<string> Functions { get; set; } = new List<string>();
+        public IList<Function> Functions { get; set; } = new List<Function>();
 
         /// <summary>
         /// Mapping of genders and their corresponding salutations
         /// </summary>
-        public Dictionary<string, Gender> Salutations { get; set; } = new Dictionary<string, Gender>();
+        public IDictionary<string, Gender> Salutations { get; set; } = new Dictionary<string, Gender>();
 
         #endregion
 

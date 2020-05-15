@@ -1,9 +1,4 @@
 ﻿using KontaktSplitter.Lang;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KontaktSplitter.Model
 {
@@ -19,8 +14,7 @@ namespace KontaktSplitter.Model
 
         public override bool Equals(object obj)
         {
-            var contact = obj as Contact;
-            if(contact == null)
+            if (!(obj is Contact contact))
             {
                 return false;
             }

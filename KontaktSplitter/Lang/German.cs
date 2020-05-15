@@ -1,6 +1,7 @@
 ﻿using KontaktSplitter.Model;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -22,7 +23,10 @@ namespace KontaktSplitter.Lang
         public German()
         {
             /*Load language settings from the configuraton file*/
-            langConfig = config.GetSection("Salut:German");
+            langConfig = config.GetSection("languages:german:salut");
+            Titles = config.GetSection("languages:german:titles").Get<List<Title>>();
+            Functions = config.GetSection("languages:german:functions").Get<List<Function>>();
+            Salutations = config.GetSection("languages:german:salutaitons").Get<Dictionary<string, Gender>>();
         }
 
 
