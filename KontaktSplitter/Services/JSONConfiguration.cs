@@ -3,29 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace KontaktSplitter.Services
 {
     public class JSONConfiguration : IConfiguration
     {
-        private List<Language> CachedLanguage;
-
-        public List<Language> GetLanguages()
+        public void UpdateSettings(IList<Language> languages)
         {
-            if (CachedLanguage == null)
+            var dict = languages.ToDictionary(l => l.Name);
+            var temp = new { languages = dict };
+            try
             {
-                CachedLanguage = JsonSerializer.Deserialize<List<Language>>(File.ReadAllText(""));
+                File.WriteAllText("Langsettings.json", JsonSerializer.Serialize(temp, new JsonSerializerOptions { WriteIndented = true }));
             }
-
-            return CachedLanguage;
-        }
-
-        public void UpdateLanguage(Language language)
-        {
-            throw new NotImplementedException();
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

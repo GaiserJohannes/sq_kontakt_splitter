@@ -23,10 +23,11 @@ namespace KontaktSplitter.Lang
         public German()
         {
             /*Load language settings from the configuraton file*/
-            langConfig = config.GetSection("languages:german:salut");
-            Titles = config.GetSection("languages:german:titles").Get<List<string>>();
-            Functions = config.GetSection("languages:german:functions").Get<List<Function>>();
-            Salutations = config.GetSection("languages:german:salutaitons").Get<Dictionary<string, Gender>>();
+            Name = "german";
+            langConfig = config.GetSection($"languages:{Name}:salut");
+            Titles = config.GetSection($"languages:{Name}:titles").Get<List<string>>();
+            Functions = config.GetSection($"languages:{Name}:functions").Get<List<Function>>();
+            Salutations = config.GetSection($"languages:{Name}:salutaitons").Get<Dictionary<string, Gender>>();
         }
 
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace KontaktSplitter.Lang
 {
@@ -24,20 +25,27 @@ namespace KontaktSplitter.Lang
 
         #region Properties
 
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+
         /// <summary>
         /// Contains language specidic vocabulary of contact titles.
         /// The list is ordered by the titles priority in descending manner
         /// </summary>
+        [JsonPropertyName("titles")]
         public IList<string> Titles { get; set; } = new List<string>();
 
         /// <summary>
         /// Contains language specific vocabulary of contact functions
         /// </summary>
+        [JsonPropertyName("functions")]
         public IList<Function> Functions { get; set; } = new List<Function>();
 
         /// <summary>
         /// Mapping of genders and their corresponding salutations
         /// </summary>
+        [JsonPropertyName("salutaitons")]
         public IDictionary<string, Gender> Salutations { get; set; } = new Dictionary<string, Gender>();
 
         #endregion

@@ -1,0 +1,192 @@
+{
+  "languages": {
+    "german": {
+      "salut": {
+        "MALE": "Sehr geehrter Herr",
+        "FEMALE": "Sehr geehrte Frau",
+        "UNKNOWN": "Sehr geehrte*r"
+      },
+      "titles": [
+        "M. A.",
+        "M. Sc.",
+        "M. Eng.",
+        "LL. M.",
+        "M. F. A.",
+        "M. Mus.",
+        "M. Ed.",
+        "Dipl.-Inf.",
+        "Dipl.-Ing.",
+        "Dipl.-Betriebsw.",
+        "Dipl.-Wirtsch.-Inf.",
+        "Dipl.-Soz.päd.",
+        "Dipl. Inf.",
+        "Dipl. Ing.",
+        "Dipl. Betriebsw.",
+        "Dipl. Wirtsch.-Inf.",
+        "Dipl. Soz.päd.",
+        "Doktor",
+        "Doktorin",
+        "Dr. agr.",
+        "Dr. biol. anim.",
+        "Dr. biol. hom.",
+        "Dr. cult.",
+        "Dr. disc. pol.",
+        "Dr.-Ing.",
+        "Dr. iur.",
+        "Dr. iur. can.",
+        "Dr. iur. et rer. pol",
+        "Dr. iur. utr.",
+        "Dr. math.",
+        "Dr. med. dent.",
+        "Dr. med. sci.",
+        "Dr. med. vet.",
+        "Dr. med.",
+        "Dr. nat. med.",
+        "Dr. nat. techn.",
+        "Dr. oec.",
+        "Dr. oec. publ.",
+        "Dr. oec. troph.",
+        "Dr. paed.",
+        "Dr. pharm.",
+        "Dr. phil.",
+        "Dr. phil. in art.",
+        "Dr. phil. nat.",
+        "Dr. PH",
+        "Dr. rer. agr.",
+        "Dr. rer. biol. hum.",
+        "Dr. rer. biol. vet.",
+        "Dr. rer. cult.",
+        "Dr. rer. cur.",
+        "Dr. rer. forest.",
+        "Dr. rer. hort.",
+        "Dr. rer. hum.",
+        "Dr. rer. med.",
+        "Dr. rer. medic.",
+        "Dr. rer. merc.",
+        "Dr. rer. mont.",
+        "Dr. rer. nat.",
+        "Dr. rer. oec.",
+        "Dr. rer. physiol.",
+        "Dr. rer. pol.",
+        "Dr. rer. publ.",
+        "Dr. rer. sec.",
+        "Dr. rer. silv.",
+        "Dr. rer. soc.",
+        "Dr. rer. tech.",
+        "Dr. sc. agr.",
+        "Dr. sc. hum.",
+        "Dr. sc. mus.",
+        "Dr. sc. oec.",
+        "Dr. sc. phil.",
+        "Dr. sc. pol.",
+        "Dr. sc. soc.",
+        "Dr. sc. techn.",
+        "Dr. Sportwiss.",
+        "Dr. theol.",
+        "Dr. troph.",
+        "Dr. h.c. mult.",
+        "Dr. h.c.",
+        "Dr. e. h.",
+        "Dr.",
+        "D.",
+        "Professor",
+        "Professorin",
+        "Prof."
+      ],
+      "functions": [
+        {
+          "Name": "Bürgermeister(in)",
+          "MaleOut": "Bürgermeister",
+          "FemaleOut": "Bürgermeisterin",
+          "DiversOut": "Bürgermeister*in"
+        },
+        {
+          "Name": "Präsident(in)",
+          "MaleOut": "Präsident",
+          "FemaleOut": "Präsidentin",
+          "DiversOut": "Präsident*in"
+        },
+        {
+          "Name": "Leiter(in)",
+          "MaleOut": "Leiter",
+          "FemaleOut": "Leiterin",
+          "DiversOut": "Leiter*in"
+        },
+        {
+          "Name": "Direktor(in)",
+          "MaleOut": "Direktor",
+          "FemaleOut": "Direktorin",
+          "DiversOut": "Direktor*in"
+        },
+        {
+          "Name": "Vorsitzende(r)",
+          "MaleOut": "Vorsitzender",
+          "FemaleOut": "Vorsitzende",
+          "DiversOut": "Vorsitzende*r"
+        },
+        {
+          "Name": "Pfarrer(in)",
+          "MaleOut": "Pfarrer",
+          "FemaleOut": "Pfarrerin",
+          "DiversOut": "Pfarrer*in"
+        },
+        {
+          "Name": "Pastor(in)",
+          "MaleOut": "Pastor",
+          "FemaleOut": "Pastorin",
+          "DiversOut": "Pastor*in"
+        },
+        {
+          "Name": "Bischof",
+          "MaleOut": "Bischof",
+          "FemaleOut": "",
+          "DiversOut": ""
+        },
+        {
+          "Name": "Kardinal",
+          "MaleOut": "Kardinal",
+          "FemaleOut": "",
+          "DiversOut": ""
+        }
+      ],
+      "salutaitons": {
+        "Frau": "FEMALE",
+        "Fr.": "FEMALE",
+        "Herr": "MALE",
+        "Hr.": "MALE"
+      }
+    },
+    "english": {
+      "salut": {
+        "MALE": "Dear Mr.",
+        "FEMALE": "Dear Ms"
+      },
+      "titles": [
+        "MBE"
+      ],
+      "functions": [
+        {
+          "Name": "Duke",
+          "MaleOut": "Duke",
+          "FemaleOut": "Duchess",
+          "DiversOut": ""
+        },
+        {
+          "Name": "Baron",
+          "MaleOut": "Baron",
+          "FemaleOut": "Baroness",
+          "DiversOut": ""
+        }
+      ],
+      "salutaitons": {
+        "Mrs.": "FEMALE",
+        "Ms.": "FEMALE",
+        "Miss": "FEMALE",
+        "Lady": "FEMALE",
+        "Mr.": "MALE",
+        "Mister": "MALE",
+        "Lord": "MALE"
+      }
+    }
+  }
+}
