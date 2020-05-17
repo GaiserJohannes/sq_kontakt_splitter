@@ -34,7 +34,8 @@ namespace KontaktSplitter.Views
 
         void IDropTarget.Drop(IDropInfo dropInfo)
         {
-
         }
+
+     
     }
 }

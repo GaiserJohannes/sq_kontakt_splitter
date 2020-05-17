@@ -1,4 +1,5 @@
 ﻿using KontaktSplitter.Model;
+using KontaktSplitter.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,12 +12,14 @@ namespace KontaktSplitter.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         private Contact contactModel;
-        private Gender genderModel;
-        public RelayCommand SplitCommand { get; private set; }
+        public string[] Genders { get; set; }
+        public string SelectedTitle { get; set; }
+        public RelayCommand SplitContactCommand { get; private set; }
+        public RelayCommand AddTitleCommand { get; private set; }
+        public RelayCommand SaveCommand { get; private set; }
+        public RelayCommand DeleteTitleCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        //[NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -31,31 +34,38 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(ContactModel));
             }
         }
-        public Gender GenderModel
-        {
-            get => genderModel;
-            set
-            {
-                genderModel = value;
-                OnPropertyChanged(nameof(GenderModel));
-            }
-        }
-
 
         public MainViewModel()
         {
-            SplitCommand = new RelayCommand(SplitContact);
+            SplitContactCommand = new RelayCommand(param=> this.SplitContact(param));
             ContactModel = new Contact();
-            GenderModel = new Gender();
+            Genders = Enum.GetNames(typeof(Gender));
+            OnPropertyChanged("Genders");
+            DeleteTitleCommand = new RelayCommand(param => this.DeleteTitle(param));
+            AddTitleCommand = new RelayCommand(AddTitle);
         }
 
         private void SplitContact(object obj)
         {
+            var text = obj as string;
 
         }
 
+        private void DeleteTitle(object obj)
+        {
+            ContactModel.Title.Remove(SelectedTitle);
+        }
 
-
+        private void AddTitle(object obj)
+        {
+            AddTitleViewModel vm = new AddTitleViewModel();
+            AddTitleWindow window = new AddTitleWindow(vm);
+            var result = window.ShowDialog();
+            if (result!=null && result.Value)
+            {
+                ContactModel.Title.Add(vm.Title);
+            }
+        }
 
     }
     public class RelayCommand : ICommand

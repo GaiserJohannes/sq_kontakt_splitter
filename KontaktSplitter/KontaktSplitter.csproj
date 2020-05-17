@@ -127,6 +127,10 @@
     <Compile Include="Services\IContactSplitter.cs" />
     <Compile Include="Services\ICRMConnector.cs" />
     <Compile Include="Services\JSONConfiguration.cs" />
+    <Page Include="Views\AddTitleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,7 +142,11 @@
     <Compile Include="Lang\English.cs" />
     <Compile Include="Lang\German.cs" />
     <Compile Include="Lang\Language.cs" />
+    <Compile Include="ViewModels\AddTitleViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\AddTitleWindow.xaml.cs">
+      <DependentUpon>AddTitleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

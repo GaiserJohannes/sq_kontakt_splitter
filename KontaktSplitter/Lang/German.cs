@@ -96,9 +96,10 @@ namespace KontaktSplitter.Lang
         /// highest academic title</returns>
         private string GetHighestAcademicTitle(Contact contact)
         {
-            if (String.IsNullOrEmpty(contact.Title)) return null;
+            //  if (String.IsNullOrEmpty(contact.Title)) return null;
+            if (contact.Title ==null || contact.Title.Count==0) return null;
 
-            string[] titles = contact.Title.Split(new char[0]);
+            string[] titles = contact.Title.ToArray(); //contact.Title.Split(new char[0]);
             var query = from t in titles
                         group t by Titles.IndexOf(t.Trim()) into g                      //Get priority of each title provided by the contact
                         orderby g.Key                                                   //Order titles by their priority

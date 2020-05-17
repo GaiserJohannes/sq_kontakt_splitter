@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
     xmlns:local="clr-namespace:KontaktSplitter"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -37,39 +37,98 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Label VerticalAlignment="Center" Content="Anrede" />
-            <TextBox Margin="5" Grid.Column="1" Text="{Binding ContactModel.Salutation}"/>
+            <TextBox Grid.Column="1" Margin="5" Text="{Binding ContactModel.Salutation}" />
             <Label Grid.Row="1" VerticalAlignment="Center" Content="Titel" />
             <!--<TextBox Grid.Row="1" Margin="5" Grid.Column="1" Text="{Binding ContactModel.Title}"/>-->
-            <ListBox Grid.Row="1" Margin="5" Grid.Column="1" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" >
+            <ListBox
+                x:Name="TitleList"
+                Grid.Row="1"
+                Grid.Column="1"
+                SelectedItem="{Binding SelectedTitle}"
+                Margin="5" ItemsSource="{Binding ContactModel.Title}"
+                dd:DragDrop.IsDragSource="True"
+                dd:DragDrop.IsDropTarget="True">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBoxItem>
-                    <TextBlock Text="Dr."/>
+                    <TextBlock Text="Dr." />
                 </ListBoxItem>
                 <ListBoxItem>
-                    <TextBlock Text="Professor"/>
+                    <TextBlock Text="Professor" />
                 </ListBoxItem>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding DeleteTitleCommand}"  Header="Löschen" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
-            <Button Grid.Row="1"  Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" BorderThickness="0" Command="{Binding AddTitleCommand}">
-                <Button.Background>
-                    <ImageBrush ImageSource="/KontaktSplitter;component/Resources/add.png"/>
-                </Button.Background>
+            <Button
+                x:Name="addButton"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding AddTitleCommand}">
+                <Button.Content>
+                    <Image Source="/KontaktSplitter;component/Resources/add.png" />
+                </Button.Content>
+                <!--<Button.Background>
+                    <ImageBrush ImageSource="/KontaktSplitter;component/Resources/add.png" />
+                </Button.Background>-->
             </Button>
             <Label Grid.Row="2" VerticalAlignment="Center" Content="Vorname" />
-            <TextBox Grid.Row="2" Margin="5" Grid.Column="1" Text="{Binding ContactModel.Name}"/>
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="5"
+                Text="{Binding ContactModel.Name}" />
             <Label Grid.Row="3" VerticalAlignment="Center" Content="Nachname" />
-            <TextBox Grid.Row="3" Margin="5" Grid.Column="1" Text="{Binding ContactModel.LastName}"/>
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="5"
+                Text="{Binding ContactModel.LastName}" />
             <Label Grid.Row="4" VerticalAlignment="Center" Content="Geschlecht" />
-            <ComboBox  Margin="5" Grid.Row="4" Grid.Column="1" ItemsSource="{Binding GenderModel}" SelectedItem="{Binding ContactModel.Gender}"/>
+            <ComboBox
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="5"
+                ItemsSource="{Binding Genders}"
+                SelectedItem="{Binding ContactModel.Gender}" />
             <Label Grid.Row="6" VerticalAlignment="Center" Content="Briefanrede" />
-            <TextBox Grid.Row="6" Margin="5" Grid.Column="1" Text="{Binding ContactModel.LetterSalutation,Mode=OneWay}"/>
+            <TextBox
+                Grid.Row="6"
+                Grid.Column="1"
+                Margin="5"
+                Text="{Binding ContactModel.LetterSalutation, Mode=OneWay}" />
         </Grid>
         <Label VerticalAlignment="Center" Content="Eingabe" />
-        <TextBox x:Name="input" Margin="5" Grid.Column="1"  Text="{Binding PhoneNumberModel.Extension}"/>
-        <Button Margin="5" Grid.Column="2"  Content="Splitten" BorderThickness="0" Command="{Binding SplitContactCommand}" CommandParameter="{Binding Text, ElementName=input}"/>
-        <Button BorderThickness="0" Margin="5" Grid.Column="1" Grid.Row="3"  Content="Speichern" Width="150" Command="{Binding SaveContactCommand}" />
+        <TextBox
+            x:Name="input"
+            Grid.Column="1"
+            Margin="5"
+            Text="{Binding PhoneNumberModel.Extension}" />
+        <Button
+            Grid.Column="2"
+            Margin="5"
+            BorderThickness="0"
+            Command="{Binding SplitContactCommand}"
+            CommandParameter="{Binding Text, ElementName=input}"
+            Content="Splitten" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="150"
+            Margin="5"
+            BorderThickness="0"
+            Command="{Binding SaveContactCommand}"
+            Content="Speichern" />
     </Grid>
 </Window>

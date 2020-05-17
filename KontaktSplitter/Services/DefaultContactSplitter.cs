@@ -44,10 +44,10 @@ namespace KontaktSplitter.Services
 
             var titleregex = CreateTitleRegex(language);
             var title = titleregex.Match(input);
-            
+            contact.Title = new System.Collections.ObjectModel.ObservableCollection<string>();
             while (title.Success)
             {
-                contact.Title = string.Format($"{contact.Title} {title.Value}").Trim(); 
+                contact.Title.Add(string.Format($"{contact.Title} {title.Value}").Trim()); // string.Format($"{contact.Title} {title.Value}").Trim(); 
                 var next = title.NextMatch();
                 if (!next.Success)
                 {
