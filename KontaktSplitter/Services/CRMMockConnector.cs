@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace KontaktSplitter.Services
 {
@@ -11,12 +12,13 @@ namespace KontaktSplitter.Services
     {
         public bool ContainsContact(Contact contact)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Der Kontaktsplitter ist noch nicht ans CRM-System angeschlossen", "Achtung");
+            return false;
         }
 
         public void StoreContact(Contact contact)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Der Kontaktsplitter ist noch nicht ans CRM-System angeschlossen", "Achtung");
         }
     }
 }
