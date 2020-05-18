@@ -156,7 +156,16 @@
                 HorizontalAlignment="Left"
                 VerticalContentAlignment="Center"
                 ItemsSource="{Binding Genders}"
-                SelectedItem="{Binding ContactModel.Gender}" />
+                SelectedItem="{Binding ContactModel.Gender}" />            
+            <Button
+                Grid.Row="8"
+                Grid.Column="1"
+                Width="150"
+                Margin="5"
+                HorizontalAlignment="Center"
+                BorderThickness="0"
+                Command="{Binding CheckDuplicateCommand}"
+                Content="Duplikatsprüfung" />            
             <Button
                 Grid.Row="8"
                 Grid.Column="1"

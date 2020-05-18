@@ -55,7 +55,7 @@ namespace KontaktSplitter.Lang
 
                 Titles = JsonConvert.DeserializeObject<List<string>>(GetJsonProperty($"languages:{Name}:titles"));
                 Functions = JsonConvert.DeserializeObject<List<Function>>(GetJsonProperty($"languages:{Name}:functions"));
-                var _Salutations = JsonConvert.DeserializeObject<Dictionary<string, Gender>>(GetJsonProperty($"languages:{Name}:salutations"));
+                Salutations = JsonConvert.DeserializeObject<Dictionary<string, Gender>>(GetJsonProperty($"languages:{Name}:salutations"));
             }
         }
 

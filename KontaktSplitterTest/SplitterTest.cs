@@ -2,6 +2,7 @@
 using KontaktSplitter.Model;
 using KontaktSplitter.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.ObjectModel;
 
 namespace KontaktSplitterTest
 {
@@ -22,7 +23,7 @@ namespace KontaktSplitterTest
             expected.Salutation = "Frau";
             expected.Gender = Gender.FEMALE;
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, expected);
         }
 
         [TestMethod]
@@ -34,7 +35,7 @@ namespace KontaktSplitterTest
 
             var expected = new Contact();
             expected.Language = new German();
-            expected.Title = "Dr.";
+            expected.Title.Add("Dr.");
             expected.Name = "Sandro";
             expected.LastName = "Gutmensch";
             expected.Salutation = "Herr";
@@ -53,7 +54,7 @@ namespace KontaktSplitterTest
 
             var expected = new Contact();
             expected.Language = new German();
-            expected.Title = "Professor";
+            expected.Title.Add("Professor");
             expected.Name = "Heinreich";
             expected.LastName = "Freiherr vom Wald";
 
@@ -116,7 +117,8 @@ namespace KontaktSplitterTest
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Frau";
-            expected.Title = "Prof. Dr. rer. nat.";
+            expected.Title.Add("Prof.");
+            expected.Title.Add("Dr. rer. nat.");
             expected.Name = "Maria";
             expected.LastName = "von Leuthäuser-Schnarrenberger";
             expected.Gender = Gender.FEMALE;
@@ -134,7 +136,7 @@ namespace KontaktSplitterTest
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Herr";
-            expected.Title = "Dipl. Ing.";
+            expected.Title.Add("Dipl. Ing.");
             expected.Name = "Max";
             expected.LastName = "von Müller";
             expected.Gender = Gender.MALE;
@@ -151,7 +153,7 @@ namespace KontaktSplitterTest
 
             var expected = new Contact();
             expected.Language = new German();
-            expected.Title = "Dr.";
+            expected.Title.Add("Dr.");
             expected.Name = "Winfried";
             expected.LastName = "Russwurm";
 
@@ -167,8 +169,31 @@ namespace KontaktSplitterTest
 
             var expected = new Contact();
             expected.Language = new German();
+            expected.Salutation = "Herr"; 
+            expected.Title.Add("Dr. h.c. mult.");
+            expected.Title.Add("Dr. rer. nat.");
+            expected.Title.Add("Dr.-Ing.");
+            expected.Name = "Paul";
+            expected.LastName = "Steffens";
+            expected.Gender = Gender.MALE;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TitleOrderTest()
+        {
+            var splitter = new DefaultContactSplitter();
+
+            var actual = splitter.SplitContact("Herr Dr.-Ing. Dr. rer. nat. Professor Dr. h.c. mult. Paul Steffens");
+
+            var expected = new Contact();
+            expected.Language = new German();
             expected.Salutation = "Herr";
-            expected.Title = "Dr.-Ing. Dr. rer. nat. Dr. h.c. mult.";
+            expected.Title.Add("Professor");
+            expected.Title.Add("Dr. h.c. mult.");
+            expected.Title.Add("Dr. rer. nat.");
+            expected.Title.Add("Dr.-Ing.");
             expected.Name = "Paul";
             expected.LastName = "Steffens";
             expected.Gender = Gender.MALE;
