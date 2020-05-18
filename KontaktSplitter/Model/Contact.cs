@@ -1,5 +1,4 @@
 ﻿using KontaktSplitter.Lang;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace KontaktSplitter.Model

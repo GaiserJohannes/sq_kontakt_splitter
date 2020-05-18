@@ -1,4 +1,6 @@
-﻿using KontaktSplitter.Model;
+﻿using KontaktSplitter.Lang;
+using KontaktSplitter.Model;
+using KontaktSplitter.Services;
 using KontaktSplitter.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -9,14 +11,20 @@ using System.Windows.Input;
 
 namespace KontaktSplitter.ViewModels
 {
+    /// <summary>
+    /// ViewModel for MainWindow
+    /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
         private Contact contactModel;
-        public string[] Genders { get; set; }
+        private bool Splitted = false;
+        private IContactSplitter splitter;
+        public Gender[] Genders { get; set; }
         public string SelectedTitle { get; set; }
+        public Function SelectedFunction { get; set; }
         public RelayCommand SplitContactCommand { get; private set; }
         public RelayCommand AddTitleCommand { get; private set; }
-        public RelayCommand SaveCommand { get; private set; }
+        public RelayCommand SaveContactCommand { get; private set; }
         public RelayCommand DeleteTitleCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,37 +45,64 @@ namespace KontaktSplitter.ViewModels
 
         public MainViewModel()
         {
-            SplitContactCommand = new RelayCommand(param=> this.SplitContact(param));
+            SplitContactCommand = new RelayCommand(param => this.SplitContact(param));
             ContactModel = new Contact();
-            Genders = Enum.GetNames(typeof(Gender));
+            splitter = new DefaultContactSplitter();
+            Genders = (Gender[])Enum.GetValues(typeof(Gender));
             OnPropertyChanged("Genders");
             DeleteTitleCommand = new RelayCommand(param => this.DeleteTitle(param));
             AddTitleCommand = new RelayCommand(AddTitle);
+            SaveContactCommand = new RelayCommand(SaveContact);
         }
 
         private void SplitContact(object obj)
         {
             var text = obj as string;
-
+            if (text != "")
+            {
+               ContactModel= splitter.SplitContact(text);
+                if (ContactModel.Gender == Gender.UNKNOWN)
+                {
+                    MessageBox.Show("Die Sprache ist unbekannt! Bitte stellen sie das Geschlecht und die korrekte Sprache ein", "Sprache unbekannt");
+                }
+                Splitted = true;
+            }
         }
 
         private void DeleteTitle(object obj)
         {
-            ContactModel.Title.Remove(SelectedTitle);
+            if (SelectedTitle != null)
+            {
+                ContactModel.Title.Remove(SelectedTitle);
+            }
         }
 
         private void AddTitle(object obj)
         {
-            AddTitleViewModel vm = new AddTitleViewModel();
-            AddTitleWindow window = new AddTitleWindow(vm);
-            var result = window.ShowDialog();
-            if (result!=null && result.Value)
+            if (Splitted)
             {
-                ContactModel.Title.Add(vm.Title);
+                AddTitleViewModel vm = new AddTitleViewModel();
+                AddTitleWindow window = new AddTitleWindow(vm);
+                var result = window.ShowDialog();
+                if (result != null && result.Value)
+                {
+                    ContactModel.Title.Add(vm.Title);
+                }
+            }
+        }
+
+        private void SaveContact(object obj)
+        {
+            if (Splitted)
+            {
+
             }
         }
 
     }
+    /// <summary>
+    /// Class for Command-Actions
+    /// </summary>
     public class RelayCommand : ICommand
     {
         private Action<object> execute;

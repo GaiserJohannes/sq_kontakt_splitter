@@ -9,27 +9,13 @@ using System.Windows.Input;
 
 namespace KontaktSplitter.ViewModels
 {
-    public class AddTitleViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// ViewModel for AddTitleWindow
+    /// </summary>                 
+    public class AddTitleViewModel 
     {
-        public string[] Genders { get; set; }
         public string Title { get; set; }
-        public string SelectedGender { get; set; }
       
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public AddTitleViewModel()
-        {
-            Genders = Enum.GetNames(typeof(Gender));
-            OnPropertyChanged("Genders");
-        }
-
-
-
-
 
     }
    

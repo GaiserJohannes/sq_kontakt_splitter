@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace KontaktSplitter.Views
 {
     /// <summary>
-    /// Interaktionslogik für AddTitleWindow.xaml
+    /// Interaction logic for AddTitleWindow.xaml
     /// </summary>
     public partial class AddTitleWindow : Window
     {
