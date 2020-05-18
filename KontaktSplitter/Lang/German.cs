@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace KontaktSplitter.Lang
 {
@@ -19,18 +23,49 @@ namespace KontaktSplitter.Lang
         /// </summary>
         private IConfigurationSection langConfig;
 
+        /*Object representation of the json file*/
+        private JObject jsonConfig;
 
         public German()
         {
             /*Load language settings from the configuraton file*/
             Name = "german";
             langConfig = config.GetSection($"languages:{Name}:salut");
-            Titles = config.GetSection($"languages:{Name}:titles").Get<List<string>>();
-            Functions = config.GetSection($"languages:{Name}:functions").Get<List<Function>>();
-            Salutations = config.GetSection($"languages:{Name}:salutaitons").Get<Dictionary<string, Gender>>();
+
+            LoadConfiguation();
         }
 
 
+        /// <summary>
+        /// Retrieves configuration from the settings.json file
+        /// </summary>
+        private void LoadConfiguation()
+        {
+            using (var reader = new StreamReader("Langsettings.json"))
+            {
+                var json = reader.ReadToEnd();
+                this.jsonConfig = JObject.Parse(json);
+
+                JsonConvert.DefaultSettings = (() =>
+                {
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter());
+                    return settings;
+                });
+
+                Titles = JsonConvert.DeserializeObject<List<string>>(GetJsonProperty($"languages:{Name}:titles"));
+                Functions = JsonConvert.DeserializeObject<List<Function>>(GetJsonProperty($"languages:{Name}:functions"));
+                var _Salutations = JsonConvert.DeserializeObject<Dictionary<string, Gender>>(GetJsonProperty($"languages:{Name}:salutations"));
+            }
+        }
+
+        /// <summary>
+        /// Creates a german letter salutation string for the provided contact
+        /// object
+        /// </summary>
+        /// <param name="contact">Contact to build a sulation string for</param>
+        /// <param name="function">Optional function of the contact</param>
+        /// <returns>German letter salutation</returns>
         public override string CreateLetterSalutation(Contact contact, string function = null)
         {
             var highestTitle = GetHighestAcademicTitle(contact);
@@ -97,17 +132,39 @@ namespace KontaktSplitter.Lang
         private string GetHighestAcademicTitle(Contact contact)
         {
             //  if (String.IsNullOrEmpty(contact.Title)) return null;
-            if (contact.Title ==null || contact.Title.Count==0) return null;
+            if (contact.Title == null || contact.Title.Count==0) return null;
+            else
+            {
+                return contact.Title.FirstOrDefault();
+            }
+        }
 
-            string[] titles = contact.Title.ToArray(); //contact.Title.Split(new char[0]);
-            var query = from t in titles
-                        group t by Titles.IndexOf(t.Trim()) into g                      //Get priority of each title provided by the contact
-                        orderby g.Key                                                   //Order titles by their priority
-                        where g.Key >= 0                                                //-1 represents an unknwon title to the system, thus it is ignored
-                        select g;
 
-            string highestTitle = query.SelectMany(group => group).FirstOrDefault();    //Only use the highest title which corresponds to the first list item
-            return highestTitle;
+        /// <summary>
+        /// Parses the json settings file to
+        /// retrieve the specified value
+        /// </summary>
+        /// <param name="name">Full json key</param>
+        /// <returns>Corresponding json value of
+        /// the specified key</returns>
+        private string GetJsonProperty(string name)
+        {
+            try
+            {
+                var path = name.Split(':');
+
+                JToken node = jsonConfig[path[0]];
+                for (int index = 1; index < path.Length; index++)
+                {
+                    node = node[path[index]];
+                }
+
+                return node.ToString();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

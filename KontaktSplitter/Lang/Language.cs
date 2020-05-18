@@ -15,6 +15,8 @@ namespace KontaktSplitter.Lang
     public abstract class Language
     {
         #region Fields
+        private const string langJsonFile = "Langsettings.json";
+
         /// <summary>
         /// provides language specific configurations
         /// and settings
@@ -55,7 +57,7 @@ namespace KontaktSplitter.Lang
         {
             this.config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("Langsettings.json", false, true)
+                .AddJsonFile(langJsonFile, false, true)
                 .Build();
         }
 

@@ -21,7 +21,7 @@ namespace KontaktSplitterTest
             expected.LastName = "Berger";
             expected.Salutation = "Frau";
             expected.Gender = Gender.FEMALE;
-            
+
             Assert.AreEqual(expected, actual);
         }
 
