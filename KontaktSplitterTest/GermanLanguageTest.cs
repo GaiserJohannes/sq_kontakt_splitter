@@ -18,7 +18,7 @@ namespace KontaktSplitterTest
              order of their priority*/
             lang = new German
             {
-                Titles = new List<string>()
+                Titles = new HashSet<string>()
                 {
                     "Prof.",
                     "Dr.",

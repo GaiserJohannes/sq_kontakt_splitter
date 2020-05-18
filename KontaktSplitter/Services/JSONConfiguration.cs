@@ -1,21 +1,27 @@
 ﻿using KontaktSplitter.Lang;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.Json;
 
 namespace KontaktSplitter.Services
 {
+    /// <summary>
+    /// saves changes to the json settings file
+    /// </summary>
     public class JSONConfiguration : IConfiguration
     {
-        public void UpdateSettings(IList<Language> languages)
+        /// <summary>
+        /// saves all titles if the language
+        /// </summary>
+        /// <param name="language"></param>
+        public void UpdateLanguage(Language language)
         {
-            var dict = languages.ToDictionary(l => l.Name);
-            var temp = new { languages = dict };
             try
             {
-                File.WriteAllText("Langsettings.json", JsonSerializer.Serialize(temp, new JsonSerializerOptions { WriteIndented = true }));
+                var obj = JObject.Parse(File.ReadAllText("Langsettings.json"));
+                obj["languages"][language.Name]["titles"] = JArray.FromObject(language.Titles);
+                File.WriteAllText("Langsettings.json", obj.ToString(Formatting.Indented));
             }
             catch (Exception e)
             {

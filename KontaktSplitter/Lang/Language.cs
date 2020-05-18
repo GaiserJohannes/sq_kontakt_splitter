@@ -36,7 +36,7 @@ namespace KontaktSplitter.Lang
         /// The list is ordered by the titles priority in descending manner
         /// </summary>
         [JsonPropertyName("titles")]
-        public IList<string> Titles { get; set; } = new List<string>();
+        public ISet<string> Titles { get; set; } = new HashSet<string>();
 
         /// <summary>
         /// Contains language specific vocabulary of contact functions

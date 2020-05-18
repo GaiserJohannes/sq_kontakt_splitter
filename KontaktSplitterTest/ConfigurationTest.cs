@@ -1,7 +1,6 @@
 ﻿using KontaktSplitter.Lang;
 using KontaktSplitter.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
 namespace KontaktSplitterTest
 {
@@ -13,9 +12,9 @@ namespace KontaktSplitterTest
         {
             var configuration = new JSONConfiguration();
             var german = new German();
-            german.Salutations.Add("Test", KontaktSplitter.Model.Gender.FEMALE);
+            german.Titles.Add("Test");
 
-            configuration.UpdateSettings(new List<Language> { german });
+            configuration.UpdateLanguage(german);
         }
     }
 }

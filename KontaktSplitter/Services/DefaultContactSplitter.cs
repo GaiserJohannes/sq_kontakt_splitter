@@ -1,6 +1,5 @@
 ﻿using KontaktSplitter.Lang;
 using KontaktSplitter.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,7 +8,7 @@ namespace KontaktSplitter.Services
 {
     public class DefaultContactSplitter : IContactSplitter
     {
-        private List<Language> languages = new List<Language>();
+        private readonly List<Language> languages = new List<Language>();
 
         public DefaultContactSplitter()
         {

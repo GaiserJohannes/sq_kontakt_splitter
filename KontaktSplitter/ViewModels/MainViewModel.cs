@@ -20,7 +20,9 @@ namespace KontaktSplitter.ViewModels
         private bool Splitted = false;
         private IContactSplitter splitter;
         private ICRMConnector CRMConnector;
+        private IConfiguration Configuration;
         public Gender[] Genders { get; set; }
+        public string[] Languages { get; set; }
 
         private string _selectedTitle;
         public string SelectedTitle
@@ -86,7 +88,9 @@ namespace KontaktSplitter.ViewModels
             ContactModel = new Contact();
             splitter = new DefaultContactSplitter();
             CRMConnector = new CRMMockConnector();
+            Configuration = new JSONConfiguration();
             Genders = (Gender[])Enum.GetValues(typeof(Gender));
+            Languages = new string[] { "deutsch", "english" };
             OnPropertyChanged("Genders");
             DeleteTitleCommand = new RelayCommand(param => this.DeleteTitle(param));
             AddTitleCommand = new RelayCommand(AddTitle);
@@ -112,6 +116,10 @@ namespace KontaktSplitter.ViewModels
         {
             if (SelectedTitle != null)
             {
+                if (ContactModel.Language.Titles.Remove(SelectedTitle))
+                {
+                    Configuration.UpdateLanguage(ContactModel.Language);
+                }
                 ContactModel.Title.Remove(SelectedTitle);
             }
         }
@@ -129,6 +137,10 @@ namespace KontaktSplitter.ViewModels
                 if (result != null && result.Value)
                 {
                     ContactModel.Title.Add(vm.Title);
+                    if (ContactModel.Language.Titles.Add(vm.Title))
+                    {
+                        Configuration.UpdateLanguage(ContactModel.Language);
+                    }
                 }
             }
         }
@@ -138,6 +150,10 @@ namespace KontaktSplitter.ViewModels
             if (Splitted)
             {
                 CRMConnector.StoreContact(contactModel);
+            }
+            else
+            {
+                MessageBox.Show("Bitte gebe einen Kontakt ein, um diesen speichern zu können.", "Achtung");
             }
         }
 

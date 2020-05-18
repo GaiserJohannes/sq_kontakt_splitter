@@ -185,7 +185,7 @@
                 Margin="5"
                 HorizontalAlignment="Left"
                 VerticalContentAlignment="Center"
-                ItemsSource="{Binding Genders}" SelectedItem="{Binding ContactModel.Gender}" />
+                ItemsSource="{Binding Languages}" SelectedItem="{Binding ContactModel.Language.Name}" />
             <Button
                 Grid.Row="8"
                 Grid.Column="1"

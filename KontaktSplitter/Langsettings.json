@@ -1,6 +1,6 @@
 {
   "languages": {
-    "german": {
+    "deutsch": {
       "salut": {
         "MALE": "Sehr geehrter Herr",
         "FEMALE": "Sehr geehrte Frau",
@@ -18,12 +18,12 @@
         "Dipl.-Ing.",
         "Dipl.-Betriebsw.",
         "Dipl.-Wirtsch.-Inf.",
-        "Dipl.-Soz.päd.",
+        "Dipl.-Soz.p\u00e4d.",
         "Dipl. Inf.",
         "Dipl. Ing.",
         "Dipl. Betriebsw.",
         "Dipl. Wirtsch.-Inf.",
-        "Dipl. Soz.päd.",
+        "Dipl. Soz.p\u00e4d.",
         "Doktor",
         "Doktorin",
         "Dr. agr.",
@@ -95,16 +95,16 @@
       ],
       "functions": [
         {
-          "Name": "Bürgermeister(in)",
-          "MaleOut": "Bürgermeister",
-          "FemaleOut": "Bürgermeisterin",
-          "DiversOut": "Bürgermeister*in"
+          "Name": "B\u00fcrgermeister(in)",
+          "MaleOut": "B\u00fcrgermeister",
+          "FemaleOut": "B\u00fcrgermeisterin",
+          "DiversOut": "B\u00fcrgermeister*in"
         },
         {
-          "Name": "Präsident(in)",
-          "MaleOut": "Präsident",
-          "FemaleOut": "Präsidentin",
-          "DiversOut": "Präsident*in"
+          "Name": "Pr\u00e4sident(in)",
+          "MaleOut": "Pr\u00e4sident",
+          "FemaleOut": "Pr\u00e4sidentin",
+          "DiversOut": "Pr\u00e4sident*in"
         },
         {
           "Name": "Leiter(in)",
@@ -178,7 +178,7 @@
           "DiversOut": ""
         }
       ],
-      "salutaitons": {
+      "salutations": {
         "Mrs.": "FEMALE",
         "Ms.": "FEMALE",
         "Miss": "FEMALE",

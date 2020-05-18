@@ -29,7 +29,7 @@ namespace KontaktSplitter.Lang
         public German()
         {
             /*Load language settings from the configuraton file*/
-            Name = "german";
+            Name = "deutsch";
             langConfig = config.GetSection($"languages:{Name}:salut");
 
             LoadConfiguation();
@@ -44,7 +44,7 @@ namespace KontaktSplitter.Lang
             using (var reader = new StreamReader("Langsettings.json"))
             {
                 var json = reader.ReadToEnd();
-                this.jsonConfig = JObject.Parse(json);
+                jsonConfig = JObject.Parse(json);
 
                 JsonConvert.DefaultSettings = (() =>
                 {
@@ -53,7 +53,7 @@ namespace KontaktSplitter.Lang
                     return settings;
                 });
 
-                Titles = JsonConvert.DeserializeObject<List<string>>(GetJsonProperty($"languages:{Name}:titles"));
+                Titles = JsonConvert.DeserializeObject<HashSet<string>>(GetJsonProperty($"languages:{Name}:titles"));
                 Functions = JsonConvert.DeserializeObject<List<Function>>(GetJsonProperty($"languages:{Name}:functions"));
                 Salutations = JsonConvert.DeserializeObject<Dictionary<string, Gender>>(GetJsonProperty($"languages:{Name}:salutations"));
             }
