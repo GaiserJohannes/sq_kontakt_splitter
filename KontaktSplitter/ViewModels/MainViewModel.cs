@@ -41,6 +41,7 @@ namespace KontaktSplitter.ViewModels
             set
             {
                 contactModel = value;
+                ContactModel.LetterSalutation = contactModel.Language?.CreateLetterSalutation(contactModel, SelectedTitle);
                 OnPropertyChanged(nameof(ContactModel));
             }
         }
