@@ -21,8 +21,31 @@ namespace KontaktSplitter.ViewModels
         private IContactSplitter splitter;
         private ICRMConnector CRMConnector;
         public Gender[] Genders { get; set; }
-        public string SelectedTitle { get; set; }
-        public Function SelectedFunction { get; set; }
+
+        private string _selectedTitle;
+        public string SelectedTitle
+        {
+            get => _selectedTitle;
+            set
+            {
+                _selectedTitle = value;
+                UpdateLetterSalutCommand?.Execute(this);
+                OnPropertyChanged(nameof(SelectedTitle));
+            }
+        }
+
+        private Function _selectedFunction;
+        public Function SelectedFunction 
+        { 
+            get => _selectedFunction;
+            set
+            {
+                _selectedFunction = value;
+                UpdateLetterSalutCommand?.Execute(this);
+                OnPropertyChanged(nameof(SelectedFunction));
+            }
+        }
+        public RelayCommand UpdateLetterSalutCommand { get; private set; }
         public RelayCommand SplitContactCommand { get; private set; }
         public RelayCommand AddTitleCommand { get; private set; }
         public RelayCommand SaveContactCommand { get; private set; }
@@ -41,13 +64,24 @@ namespace KontaktSplitter.ViewModels
             set
             {
                 contactModel = value;
-                ContactModel.LetterSalutation = contactModel.Language?.CreateLetterSalutation(contactModel, SelectedTitle);
+                UpdateLetterSalutCommand?.Execute(this);
                 OnPropertyChanged(nameof(ContactModel));
             }
         }
 
+        public string LetterSalutation
+        {
+            get => contactModel.LetterSalutation;
+            set
+            {
+                contactModel.LetterSalutation = value;
+                OnPropertyChanged(nameof(LetterSalutation));
+            }
+        }
+               
         public MainViewModel()
         {
+            UpdateLetterSalutCommand = new RelayCommand(ExecuteUpdateLetterSalut);
             SplitContactCommand = new RelayCommand(param => this.SplitContact(param));
             ContactModel = new Contact();
             splitter = new DefaultContactSplitter();
@@ -81,6 +115,9 @@ namespace KontaktSplitter.ViewModels
                 ContactModel.Title.Remove(SelectedTitle);
             }
         }
+
+        private void ExecuteUpdateLetterSalut(object obj)
+            => LetterSalutation = ContactModel.Language?.CreateLetterSalutation(ContactModel, SelectedFunction);
 
         private void AddTitle(object obj)
         {

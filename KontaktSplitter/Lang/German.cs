@@ -66,20 +66,45 @@ namespace KontaktSplitter.Lang
         /// <param name="contact">Contact to build a sulation string for</param>
         /// <param name="function">Optional function of the contact</param>
         /// <returns>German letter salutation</returns>
-        public override string CreateLetterSalutation(Contact contact, string function = null)
+        public override string CreateLetterSalutation(Contact contact, Function function = null)
         {
             var highestTitle = GetHighestAcademicTitle(contact);
+            var selectedFunction = GetFunction(function, contact.Gender);
             var salutation = GetSalutation(contact.Gender);
 
             var sb = new StringBuilder()
                 .Append(salutation).Append(" ")
-                .AppendIf(function, UseIfProvided, function)
-                .AppendIf(" ", UseIfProvided, function)
+                .AppendIf(selectedFunction, UseIfProvided, selectedFunction)
+                .AppendIf(" ", UseIfProvided, selectedFunction)
                 .AppendIf(highestTitle, UseIfProvided, highestTitle)
                 .AppendIf(" ", UseIfProvided, highestTitle)
                 .Append(contact.LastName).Append(" ");
 
             return sb.ToString().Trim();
+        }
+
+
+        /// <summary>
+        /// Retrives the corresponding
+        /// string reprentatin of the 
+        /// specified function objetc
+        /// </summary>
+        /// <param name="function">Function to retrieve 
+        /// string representation from</param>
+        /// <returns>String representation of the function</returns>
+        private string GetFunction(Function function, Gender gender)
+        {
+            if (function == null) return null;
+
+            switch(gender)
+            {
+                case Gender.MALE:
+                    return function.MaleOut;
+                case Gender.FEMALE:
+                    return function.FemaleOut;
+                default:
+                    return function.DiversOut;
+            }
         }
 
 

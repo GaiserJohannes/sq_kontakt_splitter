@@ -69,6 +69,6 @@ namespace KontaktSplitter.Lang
         /// <param name="contact">Contact to build a sulation string for</param>
         /// <param name="function">Optional function of the contact</param>
         /// <returns>Salutation string</returns>
-        public abstract string CreateLetterSalutation(Contact contact, string function = null);
+        public abstract string CreateLetterSalutation(Contact contact, Function function = null);
     }
 }

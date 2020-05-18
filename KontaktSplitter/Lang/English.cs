@@ -15,7 +15,7 @@ namespace KontaktSplitter.Lang
             Salutations = config.GetSection("languages:english:salutaitons").Get<Dictionary<string, Gender>>();
         }
 
-        public override string CreateLetterSalutation(Contact contact, string function = null)
+        public override string CreateLetterSalutation(Contact contact, Function function = null)
         {
             throw new NotImplementedException();
         }
