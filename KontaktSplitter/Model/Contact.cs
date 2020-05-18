@@ -11,7 +11,7 @@ namespace KontaktSplitter.Model
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public Language Language { get; set; }
-        public string LetterSalutation { get => Language?.CreateLetterSalutation(this); }
+        public string LetterSalutation { get; set; }
 
         public override bool Equals(object obj)
         {
