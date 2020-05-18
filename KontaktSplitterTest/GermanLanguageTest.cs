@@ -2,6 +2,7 @@
 using KontaktSplitter.Lang;
 using KontaktSplitter.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.ObjectModel;
 
 namespace KontaktSplitterTest
 {
@@ -66,7 +67,13 @@ namespace KontaktSplitterTest
                 Name = "Paul",
                 LastName = "Steffens",
                 Salutation = "Herr",
-                Title = "Dr. Ing. Dr. rer. nat. Dr. h.c. mult.",
+                Title = new ObservableCollection<string>()
+                {
+                    "Dr.",
+                    "Ing.",
+                    "Dr. rer. nat.",
+                    "Dr. h.c. mult."
+                },
                 Gender = Gender.MALE
             };
 
@@ -92,7 +99,14 @@ namespace KontaktSplitterTest
                 Name = "Maria",
                 LastName = "von Leuthäuser-Schnarrenberger",
                 Salutation = "Frau",
-                Title = "Prof. Dr. rer. nat.",
+                Title = new ObservableCollection<string>()
+                {
+                    "Prof.",
+                    "Dr.",
+                    "Ing.",
+                    "Dr. rer. nat.",
+                    "Dr. h.c. mult."
+                },
                 Gender = Gender.FEMALE
             };
 
@@ -118,7 +132,6 @@ namespace KontaktSplitterTest
                 Name = "Fawny",
                 LastName = "Weniger-Viel",
                 Salutation = string.Empty,
-                Title = string.Empty,
                 Gender = Gender.DIVERSE
             };
 
@@ -131,6 +144,36 @@ namespace KontaktSplitterTest
              symbol has to be used for the greeting. Furthermore, 
              no salutation like 'Herr' or 'Frau' are used*/
             string expected = "Sehr geehrte*r Weniger-Viel";
+            Assert.AreEqual(expected, salut);
+        }
+
+
+
+        [TestMethod]
+        public void TestNobleMan()
+        {
+            /*Arrange: Create a new contact having a noble titiel*/
+            var contact = new Contact()
+            {
+                Language = lang,
+                Name = " Heinreich",
+                LastName = "Freiherr vom Wald",
+                Title = new ObservableCollection<string>()
+                {
+                    "Professor"
+                },
+                Salutation = string.Empty,
+                Gender = Gender.MALE
+            };
+
+            /*Run: Use the language utilities to create a letter salutation of the
+             corresponding contact*/
+            string salut = contact.LetterSalutation;
+
+
+            /*Assert: Providing a noble title gender, the title
+             should be used as part of the letter salutation*/
+            string expected = "Sehr geehrter Herr Professor Freiherr vom Wald";
             Assert.AreEqual(expected, salut);
         }
     }

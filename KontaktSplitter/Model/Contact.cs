@@ -1,11 +1,12 @@
 ﻿using KontaktSplitter.Lang;
+using System.Collections.ObjectModel;
 
 namespace KontaktSplitter.Model
 {
     public class Contact
     {
         public string Salutation { get; set; }
-        public string Title { get; set; }
+        public ObservableCollection<string> Title { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }

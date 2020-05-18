@@ -1,5 +1,6 @@
 ﻿using KontaktSplitter.Lang;
 using KontaktSplitter.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -44,10 +45,10 @@ namespace KontaktSplitter.Services
 
             var titleregex = CreateTitleRegex(language);
             var title = titleregex.Match(input);
-            
+            contact.Title = new System.Collections.ObjectModel.ObservableCollection<string>();
             while (title.Success)
             {
-                contact.Title = string.Format($"{contact.Title} {title.Value}").Trim(); 
+                contact.Title.Add(title.Value);//string.Format($"{contact.Title} {title.Value}").Trim()); // string.Format($"{contact.Title} {title.Value}").Trim(); 
                 var next = title.NextMatch();
                 if (!next.Success)
                 {
