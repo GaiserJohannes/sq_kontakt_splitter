@@ -155,8 +155,19 @@
                 Margin="5"
                 HorizontalAlignment="Left"
                 VerticalContentAlignment="Center"
-                ItemsSource="{Binding Genders}"
-                SelectedItem="{Binding ContactModel.Gender}" />
+                SelectedIndex="0"
+                SelectedItem="{Binding ContactModel.Language.Name}">
+                <ComboBoxItem>Deutsch</ComboBoxItem>
+            </ComboBox>
+            <Button
+                Grid.Row="8"
+                Grid.Column="1"
+                Width="150"
+                Margin="5"
+                HorizontalAlignment="Center"
+                BorderThickness="0"
+                Command="{Binding CheckDuplicateCommand}"
+                Content="Duplikatsprüfung" />
             <Button
                 Grid.Row="8"
                 Grid.Column="1"

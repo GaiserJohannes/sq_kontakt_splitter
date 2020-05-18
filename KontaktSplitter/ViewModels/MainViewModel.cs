@@ -19,12 +19,14 @@ namespace KontaktSplitter.ViewModels
         private Contact contactModel;
         private bool Splitted = false;
         private IContactSplitter splitter;
+        private ICRMConnector CRMConnector;
         public Gender[] Genders { get; set; }
         public string SelectedTitle { get; set; }
         public Function SelectedFunction { get; set; }
         public RelayCommand SplitContactCommand { get; private set; }
         public RelayCommand AddTitleCommand { get; private set; }
         public RelayCommand SaveContactCommand { get; private set; }
+        public RelayCommand CheckDuplicateCommand { get; private set; }
         public RelayCommand DeleteTitleCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,11 +51,13 @@ namespace KontaktSplitter.ViewModels
             SplitContactCommand = new RelayCommand(param => this.SplitContact(param));
             ContactModel = new Contact();
             splitter = new DefaultContactSplitter();
+            CRMConnector = new CRMMockConnector();
             Genders = (Gender[])Enum.GetValues(typeof(Gender));
             OnPropertyChanged("Genders");
             DeleteTitleCommand = new RelayCommand(param => this.DeleteTitle(param));
             AddTitleCommand = new RelayCommand(AddTitle);
             SaveContactCommand = new RelayCommand(SaveContact);
+            CheckDuplicateCommand = new RelayCommand(CheckDuplicate);
         }
 
         private void SplitContact(object obj)
@@ -96,7 +100,22 @@ namespace KontaktSplitter.ViewModels
         {
             if (Splitted)
             {
+                CRMConnector.StoreContact(contactModel);
+            }
+        }
 
+        private void CheckDuplicate(object obj)
+        {
+            if (Splitted)
+            {
+                if (CRMConnector.ContainsContact(contactModel))
+                {
+                    MessageBox.Show("Kontakt ist bereits im CRM-System vorhanden", "CRM-System");
+                }
+                else
+                {
+                    MessageBox.Show("Kontakt ist noch nicht im CRM-System vorhanden", "CRM-System");
+                }
             }
         }
 

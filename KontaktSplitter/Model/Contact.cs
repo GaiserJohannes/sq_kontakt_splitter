@@ -6,7 +6,7 @@ namespace KontaktSplitter.Model
     public class Contact
     {
         public string Salutation { get; set; }
-        public ObservableCollection<string> Title { get; set; }
+        public ObservableCollection<string> Title { get; set; } = new ObservableCollection<string>();
         public string Name { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
@@ -24,9 +24,16 @@ namespace KontaktSplitter.Model
             {
                 return false;
             }
-            if (!(Title != null && contact.Title != null && Title.Equals(contact.Title) || Title == null && contact.Title == null))
+            if (!(Title != null && contact.Title != null && Title.Count == contact.Title.Count))
             {
                 return false;
+            }
+            for(int i = 0; i < Title.Count; i++)
+            {
+                if (! Title[i].Equals(contact.Title[i]))
+                {
+                    return false;
+                }
             }
             if (!(Name != null && contact.Name != null && Name.Equals(contact.Name) || Name == null && contact.Name == null))
             {
