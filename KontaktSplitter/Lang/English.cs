@@ -6,11 +6,18 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace KontaktSplitter.Lang
 {
     public class English : Language
     {
+
+        /// <summary>
+        /// Langauge specific settings
+        /// </summary>
+        private IConfigurationSection langConfig;
 
         /*Object representation of the json file*/
         private JObject jsonConfig;
@@ -19,6 +26,7 @@ namespace KontaktSplitter.Lang
         {
             /*Load language settings from the configuraton file*/
             Name = "english";
+            langConfig = config.GetSection($"languages:{Name}:salut");
 
             LoadConfiguation();
         }
@@ -73,9 +81,89 @@ namespace KontaktSplitter.Lang
             }
         }
 
+        /// <summary>
+        /// Predicate that verifies if
+        /// the given string provides
+        /// a valid information or whether
+        /// it is unset and should not be used
+        /// as part of the salutation
+        /// </summary>
+        /// <param name="parameter">String to verify</param>
+        /// <returns>True if the string provides an
+        /// actual content, false otherwise</returns>
+        private bool UseIfProvided(string parameter)
+        {
+            return !string.IsNullOrEmpty(parameter);
+        }
+
+        /// <summary>
+        /// Retrives the corresponding
+        /// string reprentatin of the 
+        /// specified function objetc
+        /// </summary>
+        /// <param name="function">Function to retrieve 
+        /// string representation from</param>
+        /// <returns>String representation of the function</returns>
+        private string GetFunction(Function function, Gender gender)
+        {
+            if (function == null) return null;
+
+            switch (gender)
+            {
+                case Gender.MALE:
+                    return function.MaleOut;
+                case Gender.FEMALE:
+                    return function.FemaleOut;
+                default:
+                    return function.DiversOut;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the highest academic title
+        /// if the specified contact
+        /// </summary>
+        /// <param name="contact">Contact to retrieve
+        /// its highest academic title for</param>
+        /// <returns>String representing the contacts
+        /// highest academic title</returns>
+        private string GetHighestAcademicTitle(Contact contact)
+        {
+            if (contact.Title == null || contact.Title.Count == 0) return null;
+            else
+            {
+                return contact.Title.FirstOrDefault();
+            }
+        }
+
         public override string CreateLetterSalutation(Contact contact, Function function = null)
         {
-            throw new NotImplementedException();
+            var highestTitle = GetHighestAcademicTitle(contact);
+            var selectedFunction = GetFunction(function, contact.Gender);
+            var salutation = langConfig["general"];
+
+            var sb = new StringBuilder()
+                .Append(salutation).Append(" ");
+            if (UseIfProvided(contact.Salutation))
+            {
+                if (UseIfProvided(selectedFunction))
+                {
+                    sb.Append(selectedFunction).Append(" ");
+                }
+                else
+                {
+                    sb.Append(contact.Salutation).Append(" ")
+                        .AppendIf(highestTitle, UseIfProvided, highestTitle)
+                        .AppendIf(" ", UseIfProvided, highestTitle)
+                        .Append(contact.LastName).Append(" ");
+                }
+            }
+            else
+            {
+                sb.Append(langConfig["default"]).Append(" ");
+            }
+
+            return sb.ToString().Trim();
         }
     }
 }

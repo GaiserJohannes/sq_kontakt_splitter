@@ -158,8 +158,8 @@
     },
     "english": {
       "salut": {
-        "MALE": "Dear Mr.",
-        "FEMALE": "Dear Ms"
+        "general": "Dear",
+        "default": "Sirs"
       },
       "titles": [
         "MBE"
@@ -179,13 +179,9 @@
         }
       ],
       "salutations": {
-        "Mrs.": "FEMALE",
-        "Ms.": "FEMALE",
-        "Miss": "FEMALE",
-        "Lady": "FEMALE",
-        "Mr.": "MALE",
-        "Mister": "MALE",
-        "Lord": "MALE"
+        "Mrs": "FEMALE",
+        "Ms": "FEMALE",
+        "Mr": "MALE"
       }
     }
   }
