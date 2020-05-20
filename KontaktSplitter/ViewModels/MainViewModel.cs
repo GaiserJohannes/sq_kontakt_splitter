@@ -1,4 +1,5 @@
-﻿using KontaktSplitter.Lang;
+﻿using GongSolutions.Wpf.DragDrop;
+using KontaktSplitter.Lang;
 using KontaktSplitter.Model;
 using KontaktSplitter.Services;
 using KontaktSplitter.Views;
@@ -16,15 +17,18 @@ namespace KontaktSplitter.ViewModels
     /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
+
         private Contact contactModel;
         private bool Splitted = false;
         private IContactSplitter splitter;
         private ICRMConnector CRMConnector;
         private ILanguageConfiguration Configuration;
+        private Function _selectedFunction;
+        private string _selectedTitle;
+
+        #region Properties
         public Gender[] Genders { get; set; }
         public string[] Languages { get; set; }
-
-        private string _selectedTitle;
         public string SelectedTitle
         {
             get => _selectedTitle;
@@ -35,10 +39,8 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(SelectedTitle));
             }
         }
-
-        private Function _selectedFunction;
-        public Function SelectedFunction 
-        { 
+        public Function SelectedFunction
+        {
             get => _selectedFunction;
             set
             {
@@ -47,19 +49,6 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(SelectedFunction));
             }
         }
-        public RelayCommand UpdateLetterSalutCommand { get; private set; }
-        public RelayCommand SplitContactCommand { get; private set; }
-        public RelayCommand AddTitleCommand { get; private set; }
-        public RelayCommand SaveContactCommand { get; private set; }
-        public RelayCommand CheckDuplicateCommand { get; private set; }
-        public RelayCommand DeleteTitleCommand { get; private set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public Contact ContactModel
         {
             get => contactModel;
@@ -80,7 +69,28 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(LetterSalutation));
             }
         }
-               
+        public RelayCommand UpdateLetterSalutCommand { get; private set; }
+        public RelayCommand SplitContactCommand { get; private set; }
+        public RelayCommand AddTitleCommand { get; private set; }
+        public RelayCommand SaveContactCommand { get; private set; }
+        public RelayCommand CheckDuplicateCommand { get; private set; }
+        public RelayCommand DeleteTitleCommand { get; private set; }
+        public RelayCommand ClearFunctionsCommand { get; private set; }
+        #endregion
+
+        #region PropertyChange-Event
+        /// <summary>
+        /// Raise an event, if a property's value changed 
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+        /// <summary>
+        /// Contructor
+        /// </summary>
         public MainViewModel()
         {
             UpdateLetterSalutCommand = new RelayCommand(ExecuteUpdateLetterSalut);
@@ -96,14 +106,19 @@ namespace KontaktSplitter.ViewModels
             AddTitleCommand = new RelayCommand(AddTitle);
             SaveContactCommand = new RelayCommand(SaveContact);
             CheckDuplicateCommand = new RelayCommand(CheckDuplicate);
+            ClearFunctionsCommand = new RelayCommand(ClearFunction);
         }
 
+        /// <summary>
+        /// Splits the Contact (Split-Button clicked)
+        /// </summary>
+        /// <param name="obj">Input Text</param>
         private void SplitContact(object obj)
         {
             var text = obj as string;
             if (text != "")
             {
-               ContactModel= splitter.SplitContact(text);
+                ContactModel = splitter.SplitContact(text);
                 if (ContactModel.Gender == Gender.UNKNOWN)
                 {
                     MessageBox.Show("Die Sprache ist unbekannt! Bitte stellen sie das Geschlecht und die korrekte Sprache ein", "Sprache unbekannt");
@@ -111,7 +126,10 @@ namespace KontaktSplitter.ViewModels
                 Splitted = true;
             }
         }
-
+        /// <summary>
+        /// Deletes a Title (Title-List Item)
+        /// </summary>
+        /// <param name="obj"></param>
         private void DeleteTitle(object obj)
         {
             if (SelectedTitle != null)
@@ -123,10 +141,25 @@ namespace KontaktSplitter.ViewModels
                 ContactModel.Title.Remove(SelectedTitle);
             }
         }
+        /// <summary>
+        /// Clear selected Function
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ClearFunction(object obj)
+        {
+            SelectedFunction = null;
+        }
 
+        /// <summary>
+        /// Update-Event if a field was changed
+        /// </summary>
+        /// <param name="obj"></param>
         private void ExecuteUpdateLetterSalut(object obj)
             => LetterSalutation = ContactModel.Language?.CreateLetterSalutation(ContactModel, SelectedFunction);
-
+        /// <summary>
+        /// Adds a Title (Title-List)
+        /// </summary>
+        /// <param name="obj"></param>
         private void AddTitle(object obj)
         {
             if (Splitted)
@@ -144,7 +177,10 @@ namespace KontaktSplitter.ViewModels
                 }
             }
         }
-
+        /// <summary>
+        /// Save the Contact (Save-Button)
+        /// </summary>
+        /// <param name="obj"></param>
         private void SaveContact(object obj)
         {
             if (Splitted)
@@ -156,7 +192,10 @@ namespace KontaktSplitter.ViewModels
                 MessageBox.Show("Bitte gebe einen Kontakt ein, um diesen speichern zu können.", "Achtung");
             }
         }
-
+        /// <summary>
+        /// Checks if a Contact has already been added 
+        /// </summary>
+        /// <param name="obj"></param>
         private void CheckDuplicate(object obj)
         {
             if (Splitted)
@@ -171,7 +210,6 @@ namespace KontaktSplitter.ViewModels
                 }
             }
         }
-
     }
     /// <summary>
     /// Class for Command-Actions

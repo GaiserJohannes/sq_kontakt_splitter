@@ -193,7 +193,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\clear.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\add.png" />
   </ItemGroup>
