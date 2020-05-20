@@ -181,7 +181,10 @@
       "salutations": {
         "Mrs": "FEMALE",
         "Ms": "FEMALE",
-        "Mr": "MALE"
+        "Mr": "MALE",
+        "Mrs.": "FEMALE",
+        "Ms.": "FEMALE",
+        "Mr.": "MALE"
       }
     }
   }
