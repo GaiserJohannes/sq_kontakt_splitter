@@ -129,7 +129,7 @@
     <Compile Include="Lang\Function.cs" />
     <Compile Include="Services\CRMMockConnector.cs" />
     <Compile Include="Services\DefaultContactSplitter.cs" />
-    <Compile Include="Services\IConfiguration.cs" />
+    <Compile Include="Services\ILanguageConfiguration.cs" />
     <Compile Include="Services\IContactSplitter.cs" />
     <Compile Include="Services\ICRMConnector.cs" />
     <Compile Include="Services\JSONConfiguration.cs" />

@@ -20,7 +20,7 @@ namespace KontaktSplitter.ViewModels
         private bool Splitted = false;
         private IContactSplitter splitter;
         private ICRMConnector CRMConnector;
-        private IConfiguration Configuration;
+        private ILanguageConfiguration Configuration;
         public Gender[] Genders { get; set; }
         public string[] Languages { get; set; }
 

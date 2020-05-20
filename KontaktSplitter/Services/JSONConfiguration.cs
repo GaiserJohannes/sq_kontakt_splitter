@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace KontaktSplitter.Services
@@ -9,8 +10,33 @@ namespace KontaktSplitter.Services
     /// <summary>
     /// saves changes to the json settings file
     /// </summary>
-    public class JSONConfiguration : IConfiguration
+    public class JSONConfiguration : ILanguageConfiguration
     {
+
+        private readonly List<Language> languages = new List<Language>();
+
+        /// <summary>
+        /// create languages
+        /// </summary>
+        public JSONConfiguration()
+        {
+            var german = new German();
+            languages.Add(german);
+
+            var english = new English();
+            languages.Add(english);
+
+        }
+
+        /// <summary>
+        /// get all languages of the config file
+        /// </summary>
+        /// <returns></returns>
+        public List<Language> GetLanguages()
+        {
+            return languages;
+        }
+
         /// <summary>
         /// saves all titles if the language
         /// </summary>
