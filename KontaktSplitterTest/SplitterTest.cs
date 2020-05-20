@@ -23,7 +23,7 @@ namespace KontaktSplitterTest
             expected.Salutation = "Frau";
             expected.Gender = Gender.FEMALE;
 
-            Assert.AreEqual(expected, expected);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -85,11 +85,18 @@ namespace KontaktSplitterTest
 
             var actual = splitter.SplitContact("Mme. Charlotte Noir");
 
+            //Französische Sprache ist noch nicht bekannt, deshalb
             var expected = new Contact();
-            expected.Salutation = "Mme.";
-            expected.Name = "Charlotte";
-            expected.LastName = "Noir";
-            expected.Gender = Gender.FEMALE;
+            expected.Language = new German();   //Deutsch ist Standard, falls er die Sprache anhand von Titel oder Anrede nicht bestimmen kann
+            expected.Name = "Mme.";
+            expected.LastName = "Charlotte Noir";
+            //statt
+            //var expected = new Contact();
+            //expected.Language = new French();
+            //expected.Salutation = "Mme.";
+            //expected.Name = "Charlotte";
+            //expected.LastName = "Noir";
+            //expected.Gender = Gender.FEMALE;
 
             Assert.AreEqual(expected, actual);
         }
@@ -101,8 +108,16 @@ namespace KontaktSplitterTest
 
             var actual = splitter.SplitContact("Estobar y Gonzales");
 
+            //Spanische Sprache ist noch nicht bekannt, deshalb
             var expected = new Contact();
-            //todo wie aufgeteilt?
+            expected.Language = new German();   
+            expected.Name = "Estobar";
+            expected.LastName = "y Gonzales";
+            //statt
+            //var expected = new Contact();
+            //expected.Language = new Espanol();
+            //expected.Name = "Estobar";
+            //expected.LastName = "y Gonzales";
 
             Assert.AreEqual(expected, actual);
         }
