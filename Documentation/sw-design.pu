@@ -1,0 +1,75 @@
+@startuml sw-design
+
+class Contact {
+    +Salutation: String
+    +Title: List<String>
+    +Name: String
+    +Lastname: String
+    +Language: Language
+    +Gender: Gender
+    +LetterSalutaion: String
+}
+
+class Function {
+    +Name : String
+    +MaleOut: String
+    +FemaleOut: String
+    +DiverseOut: String
+}
+
+enum Gender{
+    MALE
+    FEMALE
+    DIVERSE
+}
+
+interface ICRMConnector{
+    StoreContact(Contact)
+    ContainsContact(Contact):bool
+}
+
+interface ILanguageConfiguration{
+    GetLanguages():List<Language>
+    UpdateLanguage(Language)
+}
+
+abstract Language{
+    +Name: String
+    +Titles: List<String>
+    +Salutations:Dictionary<String,Gender>
+    +Functions:List<Function>
+    {abstract} CreateLetterSalutation(Contact,Function=NULL):String
+}
+
+interface IContactSplitter{
+    SplitContact(String):Contact
+}
+
+class CRMMockConnector{
+    +StoreContact(Contact)
+    +ContainsContact(Contact):bool
+}
+
+class JSONConfiguraion{
+    +GetLanguages():List<Language>
+    +UpdateLanguage(Language)
+}
+
+class German{
+    +CreateLetterSalutation(Contact,Function=NULL):String
+}
+
+class English{
+    +CreateLetterSalutation(Contact,Function=NULL):String
+}
+
+class DefaultContactSplitter{
+    +SplitContact(String):Contact
+}
+
+ICRMConnector <|-- CRMMockConnector
+ILanguageConfiguration <|-- JSONConfiguraion
+Language <|-- German
+Language <|-- English
+IContactSplitter <|-- DefaultContactSplitter
+@enduml
