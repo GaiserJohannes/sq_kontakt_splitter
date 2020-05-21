@@ -60,10 +60,9 @@
             <Label VerticalAlignment="Center" Content="Anrede" />
             <TextBox
                 Grid.Column="1"
-                Margin="5"            
-                IsReadOnly="true"
+                Margin="5"
                 VerticalContentAlignment="Center"
-                Text="{Binding Path=ContactModel.Salutation, UpdateSourceTrigger=PropertyChanged}">
+                Text="{Binding Path=ContactSalutation, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
                         <i:InvokeCommandAction Command="{Binding UpdateLetterSalutCommand}" />
@@ -149,7 +148,7 @@
                 SelectedItem="{Binding ContactModel.Gender}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding UpdateLetterSalutCommand}" />
+                        <i:InvokeCommandAction Command="{Binding ChangeGenderCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>

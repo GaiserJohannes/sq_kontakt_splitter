@@ -6,6 +6,7 @@ using KontaktSplitter.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -20,9 +21,9 @@ namespace KontaktSplitter.ViewModels
 
         private Contact contactModel;
         private bool Splitted = false;
-        private IContactSplitter splitter;
-        private ICRMConnector CRMConnector;
-        private ILanguageConfiguration Configuration;
+        private readonly IContactSplitter splitter;
+        private readonly ICRMConnector CRMConnector;
+        private readonly ILanguageConfiguration Configuration;
         private Function _selectedFunction;
         private string _selectedTitle;
 
@@ -39,6 +40,7 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(SelectedTitle));
             }
         }
+
         public Function SelectedFunction
         {
             get => _selectedFunction;
@@ -49,6 +51,7 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(SelectedFunction));
             }
         }
+
         public Contact ContactModel
         {
             get => contactModel;
@@ -57,6 +60,7 @@ namespace KontaktSplitter.ViewModels
                 contactModel = value;
                 UpdateLetterSalutCommand?.Execute(this);
                 OnPropertyChanged(nameof(ContactModel));
+                OnPropertyChanged(nameof(ContactSalutation));
             }
         }
 
@@ -69,9 +73,21 @@ namespace KontaktSplitter.ViewModels
                 OnPropertyChanged(nameof(LetterSalutation));
             }
         }
+
+        public string ContactSalutation
+        {
+            get => contactModel.Salutation;
+            set
+            {
+                contactModel.Salutation = value;
+                OnPropertyChanged(nameof(ContactSalutation));
+            }
+        }
+
         public RelayCommand UpdateLetterSalutCommand { get; private set; }
         public RelayCommand SplitContactCommand { get; private set; }
         public RelayCommand AddTitleCommand { get; private set; }
+        public RelayCommand ChangeGenderCommand { get; private set; }
         public RelayCommand SaveContactCommand { get; private set; }
         public RelayCommand CheckDuplicateCommand { get; private set; }
         public RelayCommand DeleteTitleCommand { get; private set; }
@@ -101,9 +117,10 @@ namespace KontaktSplitter.ViewModels
             Configuration = new JSONConfiguration();
             Genders = (Gender[])Enum.GetValues(typeof(Gender));
             Languages = new string[] { "deutsch", "english" };
-            OnPropertyChanged("Genders");
+            OnPropertyChanged(nameof(Genders));
             DeleteTitleCommand = new RelayCommand(param => this.DeleteTitle(param));
             AddTitleCommand = new RelayCommand(AddTitle);
+            ChangeGenderCommand = new RelayCommand(ChangeGender);
             SaveContactCommand = new RelayCommand(SaveContact);
             CheckDuplicateCommand = new RelayCommand(CheckDuplicate);
             ClearFunctionsCommand = new RelayCommand(ClearFunction);
@@ -156,6 +173,7 @@ namespace KontaktSplitter.ViewModels
         /// <param name="obj"></param>
         private void ExecuteUpdateLetterSalut(object obj)
             => LetterSalutation = ContactModel.Language?.CreateLetterSalutation(ContactModel, SelectedFunction);
+
         /// <summary>
         /// Adds a Title (Title-List)
         /// </summary>
@@ -177,6 +195,28 @@ namespace KontaktSplitter.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        /// change gender of person and set correct salutation
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ChangeGender(object obj)
+        {
+            if (Splitted)
+            {
+                var newSalut = contactModel.Language.Salutations.FirstOrDefault(v => v.Value.Equals(contactModel.Gender));
+                if (!string.IsNullOrEmpty(newSalut.Key))
+                {
+                    ContactSalutation = newSalut.Key;
+                }
+                else
+                {
+                    ContactSalutation = string.Empty;
+                }
+                UpdateLetterSalutCommand?.Execute(this);
+            }
+        }
+
         /// <summary>
         /// Save the Contact (Save-Button)
         /// </summary>
@@ -192,6 +232,7 @@ namespace KontaktSplitter.ViewModels
                 MessageBox.Show("Bitte gebe einen Kontakt ein, um diesen speichern zu können.", "Achtung");
             }
         }
+
         /// <summary>
         /// Checks if a Contact has already been added 
         /// </summary>
@@ -204,13 +245,10 @@ namespace KontaktSplitter.ViewModels
                 {
                     MessageBox.Show("Kontakt ist bereits im CRM-System vorhanden", "CRM-System");
                 }
-                else
-                {
-                    MessageBox.Show("Kontakt ist noch nicht im CRM-System vorhanden", "CRM-System");
-                }
             }
         }
     }
+
     /// <summary>
     /// Class for Command-Actions
     /// </summary>
