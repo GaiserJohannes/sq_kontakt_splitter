@@ -226,6 +226,15 @@
                 BorderThickness="0"
                 Command="{Binding SaveContactCommand}"
                 Content="Speichern" />
+            <Button
+                Grid.Row="8"
+                Grid.Column="1"
+                Width="150"
+                Margin="5"
+                HorizontalAlignment="Center"
+                BorderThickness="0"
+                Command="{Binding CheckDuplicateCommand}"
+                Content="Duplikatsprüfung" />
         </Grid>
     </Grid>
 </Window>
