@@ -1,6 +1,6 @@
-# Design und Architektur des Kontaktsplitters
+# Design und Architektur des Kontakt-Splitter
 
-Der Kontaktsplitter wird in der Sprache C# implementiert. Als UI-Framework dient WPF. Die grundlegende Architektur wird nach dem MVVM (Model-View-ViewModel) Konzept aufgebaut. 
+Der Kontakt-Splitter wird in der Sprache C# implementiert. Als UI-Framework dient WPF. Die grundlegende Architektur wird nach dem MVVM (Model-View-ViewModel) Konzept aufgebaut. 
 
 
 ## Klassendiagramm
@@ -14,9 +14,9 @@ Die `ICRMConnector` Schnittstelle stellt Methoden bereit, über die aufgeteilte 
 Die Schnittstele `ILanguageConfiguration` ist verantwortlich die Konfigurationsdaten der jeweiligen Sprachen zu persistieren. Dies ist ein Dictionary von Anreden zum dazugehörigen Geschlecht, sowie einer Liste von Titeln und Funktionen (Ämter), die eine Kontakt annehmen kann. 
 
 ## Klassen
-Die Kernklasse ist des Kontaktsplitters ist die Klasse `Contact`, welche Felder für Anrede, Titel, Vor- und Nachname sowie Sprache eines erkannten Kontaktes besitzt.
+Die Kernklasse des Kontakt-Splitter ist die Klasse `Contact`, welche Felder für Anrede, Titel, Vor- und Nachname sowie Sprache eines erkannten Kontaktes besitzt.
 
-`DefaultContactSplitter` stellt eine standardmäßige Implementierung der Schnittstelle `IContactSplitter` bereit. Bei speziellen Anwendungsfällen kann der Kontaktsplitter später über weitere Split-Implementierungen erweitert werden.
+`DefaultContactSplitter` stellt eine standardmäßige Implementierung der Schnittstelle `IContactSplitter` bereit. Bei speziellen Anwendungsfällen kann der Kontakt-Splitter später über weitere Split-Implementierungen erweitert werden.
 
 Um Kontakte unterschiedlicher Sprachen verwalten und die Briefanrede in der jeweiligen Sprache zu erzeugen, existiert die Abstrakte Klasse  `Language`. Sie verwaltet die möglichen Titel, die möglichen Funktionen/Ämter sowie die Anreden  unterschiedlicher Geschlechter. Die Daten zu einer Funktion wird in der Klasse `Function` abgelegt, diese Beinhaltet die Anrede in unterschiedlichen Geschlechtsformen. 
 
@@ -27,4 +27,4 @@ Optional kann beim generieren einer Briefanrede auch eine Funktion angegeben wer
 
 Die Klasse `JSONConfiguration` implementiert die Schnittstelle `ILanguageConfiguration` und nimmt anhand von JSON Konfigurationsdateien die Konfiguration der verfügbaren Sprachen vor.
 
-Während der Entwicklung des Kontaktsplitters ist dieser noch nicht an das produktive CRM-System angebunden. Die Anbindung wird über die Klasse `CRMMockConnector` simuliert und kann später durch eine richtige Anbindung ersetzt werden.
+Während der Entwicklung des Kontakt-Splitter ist dieser noch nicht an das produktive CRM-System angebunden. Die Anbindung wird über die Klasse `CRMMockConnector` simuliert und kann später durch eine richtige Anbindung ersetzt werden.
