@@ -11,25 +11,18 @@ namespace KontaktSplitterTest
     {
         private Language lang;
 
+        /// <summary>
+        ///  Gets or sets the test context which provides
+        ///  information about and functionality for the current test run.
+        ///</summary>
+        public TestContext TestContext { get; set; }
+
         [TestInitialize]
         public void Init()
         {
             /*Setup a language model and fill Academic Titles in 
              order of their priority*/
-            lang = new German
-            {
-                Titles = new HashSet<string>()
-                {
-                    "Prof.",
-                    "Dr.",
-                    "Dipl.",
-                    "rer.",
-                    "nat.",
-                    "med.",
-                    "h.c mult.",
-                    "Ing.",
-                },
-            };
+            lang = new German();
         }
 
 
@@ -48,11 +41,14 @@ namespace KontaktSplitterTest
 
             /*Run: Use the language utilities to create a letter salutation of the
              corresponding contact*/
-            string salut = contact.LetterSalutation;
+            string salut = lang.CreateLetterSalutation(contact);
 
 
             /*Assert: Providing a commoner name, no titles and function shall be used*/
             string expected = "Sehr geehrte Frau Berger";
+            TestContext.WriteLine("expected: " + expected);
+            TestContext.WriteLine("actual: " + salut);
+            TestContext.WriteLine("equal? " + salut.Equals(expected));
             Assert.AreEqual(expected, salut);
         }
 
@@ -79,12 +75,15 @@ namespace KontaktSplitterTest
 
             /*Run: Use the language utilities to create a letter salutation of the
              corresponding contact*/
-            string salut = contact.LetterSalutation;
+            string salut = lang.CreateLetterSalutation(contact);
 
 
             /*Assert: Providing a academic name, only the highest academic
              tidle shall be used within the salutation*/
             string expected = "Sehr geehrter Herr Dr. Steffens";
+            TestContext.WriteLine("expected: " + expected);
+            TestContext.WriteLine("actual: " + salut);
+            TestContext.WriteLine("equal? " + salut.Equals(expected));
             Assert.AreEqual(expected, salut);
         }
 
@@ -112,12 +111,15 @@ namespace KontaktSplitterTest
 
             /*Run: Use the language utilities to create a letter salutation of the
              corresponding contact*/
-            string salut = contact.LetterSalutation;
+            string salut = lang.CreateLetterSalutation(contact);
 
 
             /*Assert: Providing a academic name, only the highest academic
              tidle shall be used within the salutation*/
             string expected = "Sehr geehrte Frau Prof. von Leuthäuser-Schnarrenberger";
+            TestContext.WriteLine("expected: " + expected);
+            TestContext.WriteLine("actual: " + salut);
+            TestContext.WriteLine("equal? " + salut.Equals(expected));
             Assert.AreEqual(expected, salut);
         }
 
@@ -137,13 +139,16 @@ namespace KontaktSplitterTest
 
             /*Run: Use the language utilities to create a letter salutation of the
              corresponding contact*/
-            string salut = contact.LetterSalutation;
+            string salut = lang.CreateLetterSalutation(contact);
 
 
             /*Assert: Providing a diverse gender, the gender gap
              symbol has to be used for the greeting. Furthermore, 
              no salutation like 'Herr' or 'Frau' are used*/
             string expected = "Sehr geehrte*r Weniger-Viel";
+            TestContext.WriteLine("expected: " + expected);
+            TestContext.WriteLine("actual: " + salut);
+            TestContext.WriteLine("equal? " + salut.Equals(expected));
             Assert.AreEqual(expected, salut);
         }
 
@@ -168,12 +173,15 @@ namespace KontaktSplitterTest
 
             /*Run: Use the language utilities to create a letter salutation of the
              corresponding contact*/
-            string salut = contact.LetterSalutation;
+            string salut = lang.CreateLetterSalutation(contact);
 
 
             /*Assert: Providing a noble title gender, the title
              should be used as part of the letter salutation*/
             string expected = "Sehr geehrter Herr Professor Freiherr vom Wald";
+            TestContext.WriteLine("expected: " + expected);
+            TestContext.WriteLine("actual: " + salut);
+            TestContext.WriteLine("equal? " + salut.Equals(expected));
             Assert.AreEqual(expected, salut);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using KontaktSplitter.Lang;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace KontaktSplitter.Model
@@ -12,6 +13,11 @@ namespace KontaktSplitter.Model
         public Gender Gender { get; set; }
         public Language Language { get; set; }
         public string LetterSalutation { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format($"Salutation: {Salutation} - Titles: {string.Join(" ", new List<string>(Title))} - Name: {Name} - Lastname: {LastName} - Gender: {Gender} - Language: {Language?.Name}");
+        }
 
         public override bool Equals(object obj)
         {

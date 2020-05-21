@@ -2,20 +2,32 @@
 using KontaktSplitter.Model;
 using KontaktSplitter.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.ObjectModel;
 
 namespace KontaktSplitterTest
 {
     [TestClass]
-    public class SplitterTest
-    {
+    public class SplitterTest { 
+
+        private DefaultContactSplitter splitter;
+
+        /// <summary>
+        ///  Gets or sets the test context which provides
+        ///  information about and functionality for the current test run.
+        ///</summary>
+        public TestContext TestContext { get; set; }
+        
+        [TestInitialize]
+        public void Init()
+        {
+            splitter = new DefaultContactSplitter();
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Frau Sandra Berger");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Name = "Sandra";
@@ -23,16 +35,20 @@ namespace KontaktSplitterTest
             expected.Salutation = "Frau";
             expected.Gender = Gender.FEMALE;
 
+            //Act
+            var actual = splitter.SplitContact("Frau Sandra Berger");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod2()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Herr Dr. Sandro Gutmensch");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Title.Add("Dr.");
@@ -41,33 +57,40 @@ namespace KontaktSplitterTest
             expected.Salutation = "Herr";
             expected.Gender = Gender.MALE;
 
+            //Act
+            var actual = splitter.SplitContact("Herr Dr. Sandro Gutmensch");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod3()
         {
-            var splitter = new DefaultContactSplitter();
-            var x = new Contact();
-
-            var actual = splitter.SplitContact("Professor Heinreich Freiherr vom Wald");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Title.Add("Professor");
             expected.Name = "Heinreich";
             expected.LastName = "Freiherr vom Wald";
 
+            //Act
+            var actual = splitter.SplitContact("Professor Heinreich Freiherr vom Wald");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod4()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Mrs. Doreen Faber");
-
+            //Assert
             var expected = new Contact();
             expected.Language = new English();
             expected.Salutation = "Mrs.";
@@ -75,16 +98,20 @@ namespace KontaktSplitterTest
             expected.LastName = "Faber";
             expected.Gender = Gender.FEMALE;
 
+            //Act
+            var actual = splitter.SplitContact("Mrs. Doreen Faber");
+            
+            //Arrange
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod5()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Mme. Charlotte Noir");
-
+            //Arrange
             //Französische Sprache ist noch nicht bekannt, deshalb
             var expected = new Contact();
             expected.Language = new German();   //Deutsch ist Standard, falls er die Sprache anhand von Titel oder Anrede nicht bestimmen kann
@@ -98,19 +125,23 @@ namespace KontaktSplitterTest
             //expected.LastName = "Noir";
             //expected.Gender = Gender.FEMALE;
 
+            //Act
+            var actual = splitter.SplitContact("Mme. Charlotte Noir");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod6()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Estobar y Gonzales");
-
+            //Arrange
             //Spanische Sprache ist noch nicht bekannt, deshalb
             var expected = new Contact();
-            expected.Language = new German();   
+            expected.Language = new German();
             expected.Name = "Estobar";
             expected.LastName = "y Gonzales";
             //statt
@@ -119,16 +150,20 @@ namespace KontaktSplitterTest
             //expected.Name = "Estobar";
             //expected.LastName = "y Gonzales";
 
+            //Act
+            var actual = splitter.SplitContact("Estobar y Gonzales");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod7()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Frau Prof. Dr. rer. nat. Maria von Leuthäuser-Schnarrenberger");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Frau";
@@ -138,16 +173,20 @@ namespace KontaktSplitterTest
             expected.LastName = "von Leuthäuser-Schnarrenberger";
             expected.Gender = Gender.FEMALE;
 
+            //Act
+            var actual = splitter.SplitContact("Frau Prof. Dr. rer. nat. Maria von Leuthäuser-Schnarrenberger");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod8()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Herr Dipl. Ing. Max von Müller");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Herr";
@@ -156,35 +195,43 @@ namespace KontaktSplitterTest
             expected.LastName = "von Müller";
             expected.Gender = Gender.MALE;
 
+            //Act
+            var actual = splitter.SplitContact("Herr Dipl. Ing. Max von Müller");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod9()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Dr. Russwurm, Winfried");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Title.Add("Dr.");
             expected.Name = "Winfried";
             expected.LastName = "Russwurm";
 
+            //Act
+            var actual = splitter.SplitContact("Dr. Russwurm, Winfried");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod10()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Herr Dr.-Ing. Dr. rer. nat. Dr. h.c. mult. Paul Steffens");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
-            expected.Salutation = "Herr"; 
+            expected.Salutation = "Herr";
             expected.Title.Add("Dr. h.c. mult.");
             expected.Title.Add("Dr. rer. nat.");
             expected.Title.Add("Dr.-Ing.");
@@ -192,16 +239,20 @@ namespace KontaktSplitterTest
             expected.LastName = "Steffens";
             expected.Gender = Gender.MALE;
 
+            //Act
+            var actual = splitter.SplitContact("Herr Dr.-Ing. Dr. rer. nat. Dr. h.c. mult. Paul Steffens");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TitleOrderTest()
         {
-            var splitter = new DefaultContactSplitter();
-
-            var actual = splitter.SplitContact("Herr Dr.-Ing. Dr. rer. nat. Professor Dr. h.c. mult. Paul Steffens");
-
+            //Arrange
             var expected = new Contact();
             expected.Language = new German();
             expected.Salutation = "Herr";
@@ -213,6 +264,13 @@ namespace KontaktSplitterTest
             expected.LastName = "Steffens";
             expected.Gender = Gender.MALE;
 
+            //Act
+            var actual = splitter.SplitContact("Herr Dr.-Ing. Dr. rer. nat. Professor Dr. h.c. mult. Paul Steffens");
+
+            //Assert
+            TestContext.WriteLine("expected: " + expected.ToString());
+            TestContext.WriteLine("actual: " + expected.ToString());
+            TestContext.WriteLine("equal? " + actual.Equals(expected));
             Assert.AreEqual(expected, actual);
         }
     }
