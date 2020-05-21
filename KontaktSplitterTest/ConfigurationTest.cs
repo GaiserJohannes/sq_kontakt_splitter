@@ -15,6 +15,8 @@ namespace KontaktSplitterTest
             german.Titles.Add("Test");
 
             configuration.UpdateLanguage(german);
+
+            Assert.IsTrue(german.Titles.Contains("Test"));
         }
     }
 }

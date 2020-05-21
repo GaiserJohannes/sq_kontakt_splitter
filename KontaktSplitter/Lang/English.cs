@@ -17,7 +17,7 @@ namespace KontaktSplitter.Lang
         /// <summary>
         /// Langauge specific settings
         /// </summary>
-        private IConfigurationSection langConfig;
+        private readonly IConfigurationSection langConfig;
 
         /*Object representation of the json file*/
         private JObject jsonConfig;
@@ -136,6 +136,13 @@ namespace KontaktSplitter.Lang
             }
         }
 
+        /// <summary>
+        /// Creates a english letter salutation string for the provided contact
+        /// object
+        /// </summary>
+        /// <param name="contact">Contact to build a sulation string for</param>
+        /// <param name="function">Optional function of the contact</param>
+        /// <returns>English letter salutation</returns>
         public override string CreateLetterSalutation(Contact contact, Function function = null)
         {
             var highestTitle = GetHighestAcademicTitle(contact);
