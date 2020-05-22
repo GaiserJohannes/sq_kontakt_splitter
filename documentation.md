@@ -11,7 +11,7 @@ Das Interface `IContactSplitter` stellt mit `SplitContact(String)` eine Methode 
 
 Die `ICRMConnector` Schnittstelle stellt Methoden bereit, über die aufgeteilte Kontakte im CRM-System abgelegt werden können sowie für eine Überprüfung, ob ein Kontakt bereits in diesem System hinterlegt ist.
 
-Die Schnittstele `ILanguageConfiguration` ist verantwortlich die Konfigurationsdaten der jeweiligen Sprachen zu persistieren. Dies ist ein Dictionary von Anreden zum dazugehörigen Geschlecht, sowie einer Liste von Titeln und Funktionen (Ämter), die eine Kontakt annehmen kann. 
+Die Schnittstele `ILanguageConfiguration` ist verantwortlich die Konfigurationsdaten der jeweiligen Sprachen zu persistieren. Dies ist ein Dictionary von Anreden zum dazugehörigen Geschlecht, sowie einer Liste von Titeln und Funktionen (Ämter), die ein Kontakt annehmen kann. 
 
 ## Klassen
 Die Kernklasse des Kontakt-Splitter ist die Klasse `Contact`, welche Felder für Anrede, Titel, Vor- und Nachname sowie Sprache eines erkannten Kontaktes besitzt.
